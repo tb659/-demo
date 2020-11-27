@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>page30</title>
+    <script src="jquery_1.12.4.min.js"></script>
+</head>
+
+<body>
+    <div class="listBox"></div>
+    <div class="pagination">
+        <input type="text" class="button">
+    </div>
+</body>
+<script>
+    // 假设有接口 http://api.com/data，在请求时接收一个可选参数 page（分页码）
+    // 每次请求会返回 30 条数据。每条数据有id, name, age, sex 四个属性。
+    // 请使用 jQuery 中的有关 AJAX 的方法实现一个数据分页显示效果
+
+    function getData(page) {
+        $.getJSON('http://api.com/data', { page: page }, function (res) {
+            //显示数据
+            $('.listBox').empty();
+            res.forEach(function (item) {
+                ['id', 'name', 'age', 'sex'].map(function (it) {
+                    return $('<div>').text(item[it])
+                }).wrapAll('<div>').appendTo('.listBox');
+            });
+        });
+    }
+    $('.pagination .button').click(function () {
+        getData($(this).val());
+    });
+    getData(1);
+
+</script>
+
+</html>

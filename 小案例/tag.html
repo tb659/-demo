@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .clearfix:after,
+      .clearfix:before {
+        display: table;
+        content: '';
+      }
+      .clearfix:after {
+        clear: both;
+      }
+      .MT_tags_cont {
+        cursor: text;
+        width: 300px;
+      }
+      .MT_tags_cont .MT_tag_ul {
+        border: 1px solid #ddd;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .MT_tag_ul .MT_tips {
+        color: #ccc;
+        display: inline-block;
+        border: 1px solid;
+        border-radius: 4px;
+        padding: 4px 8px;
+        height: 30px;
+        box-sizing: border-box;
+      }
+      .MT_tag_input {
+        width: 114px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        padding: 8px;
+        margin-right: 10px;
+        outline: none;
+        float: left;
+      }
+      .MT_tag_input::placeholder {
+        color: #ddd;
+        font-size: 16px;
+        display: inline-block;
+      }
+      .MT_tag_item {
+        background: #ecf5ff;
+        border: 1px solid #d9ecff;
+        color: #409eff;
+        border-radius: 4px;
+        height: 30px;
+        line-height: 30px;
+        box-sizing: border-box;
+        padding: 0 8px;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+      .MT_tag_span {
+        float: left;
+      }
+      .MT_tag_del {
+        float: left;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        margin: 6px 0 6px 6px;
+        text-align: center;
+        line-height: 16px;
+      }
+      .MT_tag_del:hover {
+        color: #fff;
+        background-color: #409eff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="MT_tags_container"></div>
+
+    <button onclick="getTags()">保存</button>
+  </body>
+</html>
+
+<script src="./jquery_1.12.4.min.js"></script>
+<script>
+  var tagList = [] // 数据
+  var editWidth = 0 // 当前dom宽度
+  var editIndex = 0 // 当前编辑下标
+  var isEdit = false // 当前是否编辑状态
+
+  $('#MT_tags_container').html('<textarea name="" id="MT_tag_textarea"></textarea><div class="MT_tags_cont"><ul class="MT_tag_ul clearfix"><li class="MT_tips">请输入关键词</li></ul></div>')
+
+  // 聚焦
+  $(document).on('click', '.MT_tags_cont', function () {
+    if (!$('#MT_tag_textarea').val()) {
+      $('.MT_tag_ul').html(' ')
+      $('.MT_tag_ul').html("<input class='MT_tag_input' />")
+    }
+    $('.MT_tag_input').focus()
+  })
+
+  // 失焦
+  $(document).on('blur', '.MT_tag_ul input', function () {
+    if (!$('#MT_tag_textarea').val() && !$(this).val()) {
+      $('.MT_tag_ul').html($('<li class="MT_tips">').html('请输入关键词'))
+    } else {
+      if ($(this).val() === '') return
+
+      var val = $(this).val()
+      exist = false
+      $.each(tagList, function (idx, item) {
+        if (val === item) {
+          exist = true
+          return false
+        }
+      })
+      if (exist) {
+        console.log('已存在')
+        $('.MT_tag_input').val('')
+        return
+      }
+      if (isEdit) {
+        $(this).replaceWith($("<li class='MT_tag_item'  index=" + editIndex + '>').html('<span class="MT_tag_span">' + val + '</span><span class="MT_tag_del">x</span>'))
+        isEdit = false
+      } else {
+        $(this).replaceWith($("<li class='MT_tag_item'  index=" + $('li').length + '>').html('<span class="MT_tag_span">' + val + '</span><span class="MT_tag_del">x</span>'))
+      }
+      $('.MT_tag_ul').append($("<input class='MT_tag_input' placeholder='请输入关键词' />"))
+      tagList = []
+      $('.MT_tag_ul li').each(function (idx, item) {
+        tagList.push($(this).children('.MT_tag_span').text())
+      })
+      var str = ''
+      $.each(tagList, function (idx, item) {
+        str += item + ','
+      })
+      $('#MT_tag_textarea').val(str)
+    }
+  })
+
+  // 删除
+  $(document).on('click', '.MT_tag_ul .MT_tag_del', function (event) {
+    var index = $(this).parent().attr('index')
+    if ($(this).attr('class') == 'MT_tag_del') event.stopPropagation()
+    $(this).parent().remove()
+    $('.MT_tag_ul li').each(function (idx, item) {
+      $(item).attr('index', idx)
+    })
+    tagList.splice(index, 1)
+    var val = ''
+    $.each(tagList, function (idx, item) {
+      val += item + ','
+    })
+    $('#MT_tag_textarea').val(val)
+    if (!val) {
+      $('.MT_tag_ul').html($('<li class="MT_tips">').html('请输入关键词'))
+    }
+  })
+
+  // 编辑
+  $(document).on('click', '.MT_tag_ul .MT_tag_span', function (event) {
+    var index = $(this).parent().attr('index')
+    var tag = $(this).text()
+    editIndex = index
+    isEdit = true
+    editWidth = $(this).parent().width()
+    if ($(this).attr('class') == 'MT_tag_span') event.stopPropagation()
+    $('.MT_tag_input').remove()
+    $(this)
+      .parent()
+      .replaceWith(
+        $("<input class='MT_tag_input'  placeholder='请输入关键词' />")
+          .val(tag)
+          .width(editWidth + 20)
+      )
+    $('.MT_tag_input').focus()
+    var index = $(this).parent().attr('index')
+    tagList.splice(index, 1)
+  })
+
+  $(document).keyup(function (event) {
+    // tab
+    if (event.keyCode === 9) {
+      $('.MT_tag_input').focus()
+    }
+    // 回车
+    if (event.keyCode === 13) {
+      $('.MT_tag_input').blur()
+      $('.MT_tag_input').focus()
+    }
+  })
+  getTags()
+  function getTags() {
+    console.log(tagList)
+  }
+</script>

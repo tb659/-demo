@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      div::before {
+        content: '';
+        display: block;
+        width: 100px;
+        height: 30px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>1234</div>
+  </body>
+</html>
+<script>
+  const arr = ['苹果11', '香蕉11', '橘子', '香蕉', '苹果']
+
+  // filter返回匹配到的新数组 匹配不到返回空数组
+  var rul = arr.filter((c) => c.length > 2)
+  console.log('filter返回匹配到的新数组--->', rul)
+
+  // find返回匹配到的值 匹配不到返回 undefined
+  var rul = arr.find((c) => c === '香蕉')
+  console.log('find返回匹配到的值--->', rul)
+
+  // findIndex返回匹配到的下标 匹配不到返回 -1
+  var rul = arr.findIndex((c) => c === '香蕉1')
+  console.log('findIndex返回匹配到的下标--->', rul)
+
+  // some返回匹配到的true 匹配不到返回 false
+  var rul = arr.some((c) => c === '香蕉')
+  console.log('some返回Boolean值--->', rul)
+</script>

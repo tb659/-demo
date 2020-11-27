@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .item-box {
+      position: relative;
+    }
+
+    .item {
+      width: 100px;
+      height: 100px;
+      display: none;
+      border: 1px solid #000;
+    }
+
+    .item:nth-of-type(1) {
+      display: block;
+    }
+
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <input class="active" type="button" value="选项一">
+    <input type="button" value="选项二">
+    <input type="button" value="选项三">
+    <div class="item">内容一</div>
+    <div class="item">内容二</div>
+    <div class="item">内容三</div>
+  </div>
+</body>
+
+</html>
+<script>
+
+  class Tab {
+    constructor(el) {
+      this.node = document.getElementById(el)
+      this.aInput = this.node.getElementsByTagName('input')
+      this.aDiv = this.node.getElementsByTagName('div')
+      this.init()
+    }
+    init() {
+      for (let i = 0; i < this.aInput.length; i++) {
+        this.aInput[i].onclick = function () {
+          this.hide()
+          this.show(i)
+        }.bind(this)
+      }
+    }
+    hide() {
+      for (let i = 0; i < this.aInput.length; i++) {
+        this.aInput[i].className = ''
+        this.aDiv[i].style.display = 'none'
+      }
+    }
+    show(index) {
+      this.aInput[index].className = 'active'
+      this.aDiv[index].style.display = 'block'
+    }
+  }
+
+
+  new Tab('root')
+</script>

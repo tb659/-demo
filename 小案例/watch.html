@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='box'>
+    {{dataInfo}}
+    <button @click="change">改变</button>
+  </div>
+  <script src='https://cdn.jsdelivr.net/npm/vue'></script>
+  <script>
+    var vm = new Vue({
+      el: '#box',
+      data: {
+        dataInfo: {
+            a: '我是a',
+            b: '我是b',
+            c: ''
+          }
+      },
+      methods: {
+        change() {
+          this.dataInfo = { a: 1, b: '', c: 3 }
+        }
+      },
+      watch: {
+        testDataNew: {
+          handler: (val, olVal) => {
+            console.log('我变化了', val, olVal)
+          },
+          deep: true
+        }
+      },
+      computed: {
+        testDataNew() {
+          return JSON.parse(JSON.stringify(this.dataInfo))
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

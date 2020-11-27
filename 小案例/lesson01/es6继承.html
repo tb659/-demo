@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+
+  /* 
+    class的继承
+  
+    Class可以通过extends关键字实现继承,ES5是通过修改原型链实现继承的
+    子类继承父类，必须在constructor函数的第一行调用super();
+    之后才能使用关键字this 因为子类没有自己的this，而是继承父类的this
+    如果不调用super() 子类就得不到this对象
+    类似于 Parent.apply(this)
+   */
+
+  class Point {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+    }
+    sum() {
+      console.log(this.x + this.y);
+    }
+  }
+  var p2 = new Point(1, 2);
+
+
+  class ColorPoint extends Point {
+    constructor(x, y, color) {
+      super(x, y); // 调用父类的constructor(x, y) this
+      this.color = color;
+      this.sum = function () {
+        console.log(this.x + this.y);
+      }
+    }
+    sum2() {
+      console.log(1);
+    }
+  }
+  const color1 = new ColorPoint(12, 21, 'red')
+  console.log(color1);
+  color1.sum()
+  console.log(color1.hasOwnProperty('sum'));
+
+  //  ES5的继承实质是先创造子类的实例对象this,然后再将父类的方法添加到this上面
+  //  ES6的继承机制完全不同,实质是先创造父类的实例对象this(所以必须先调用super方法),然后再用子类的构造函数修改this.
+  //  如果子类没有定义constructor方法,这个方法会被默认添加.
+
+  class ColorPoint2 extends Point {
+  }
+
+  // 等同于
+  class ColorPoint3 extends Point {
+    constructor(...args) {
+      super(...args);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // 继承: 子类别拥有父类别的属性和方法  
+  // 原型继承 对象冒充继承 组合继承 寄生继承 寄生组合继承 组合寄生继承...
+
+
+  // 原型继承
+  // 原型继承: 子类别的原型等于父类别的一个实例  将父类别的属性和方法都继承到子类别的原型上 
+  // function Person(name, sex) {
+  // 	this.name = name;
+  // 	this.sex = sex;
+  // }
+  // Person.prototype.eat = function(){
+  // 	console.log('吃');
+  // }
+
+  // function Student( num) {
+  // 	this.num = num;
+  // }
+
+  // Student.prototype = new Person('mt', 'nan');
+
+  // // 使用对象的属性和方法时: 优先使用实例属性/方法  如果没有就是使用原型 如果原型上还没有  就使用父类的原型上的属性/方法 直到找到Object的原型
+
+  // let s1 = new Student(111);
+  // console.log(s1);
+  // console.log(s1.name);
+  // console.log(s1.sex);
+
+
+
+
+  // // 对象冒充:
+  // // 在子类别的构造函数中通过call/apply调用父类别的构造函数  将当前this传入来添加属性和方法
+  // function Person(name, sex) {
+  //   this.name = name;
+  //   this.sex = sex;
+  // }
+  // Person.prototype.eat = function () {
+  //   console.log('吃');
+  // }
+
+  // function Student(name, sex, num) {
+  //   this.num = num;
+
+  //   // 只能继承父类别的实例属性和实例方法
+  //   Person.call(this, name, sex);
+  // }
+
+  // let s1 = new Student('mt', '男', 111);
+  // console.log(s1);
+
+  // s1.eat(); //报错 
+
+
+
+
+  // // 组合继承 = 对象冒充+ 原型继承
+  // function Person(name, sex) {
+  //   this.name = name;
+  //   this.sex = sex;
+  // }
+  // Person.prototype.eat = function () {
+  //   console.log('吃');
+  // }
+
+  // function Student(name, sex, num) {
+  //   this.num = num;
+
+  //   // 对象冒充: 将父类别的实例属性和实例方法都继承为子类别的实例属性/方法
+  //   Person.call(this, name, sex);
+  // }
+
+  // // 原型继承:将父类别的原型属性/方法都即成为子类别的原型属性和原型方法
+  // Student.prototype = new Person();
+
+  // let s1 = new Student('mt', '男', 111);
+  // console.log(s1);
+
+  // s1.eat();
+
+
+
+</script>

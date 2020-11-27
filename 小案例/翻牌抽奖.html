@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>翻牌抽奖</title>
+    <script src="jquery-3.0.0.min.js"></script>
+    <style>
+        *{margin: 0;padding: 0;}
+        .clearfix:after, .clearfix:before {
+            content: '';
+            display: table;
+        }
+        .clearfix:after {
+            clear: both;
+        }
+        .box {
+            width: 462px;
+            height: 582px;
+            margin: 20px auto;
+            position: relative;
+        }
+        .parent {
+            width: 462px;
+            height: 582px;
+            box-sizing: border-box;
+            padding: 20px;
+            border-radius: 50px;
+            background-color: #cccccc;
+            perspective: 600px;
+        }
+        .wrapper {
+            margin: 20px;
+            width: 100px;
+            height: 140px;
+            float: left;
+            font-size: 30px;
+            text-align: center;
+            line-height: 140px;
+            position: absolute;
+            box-sizing: border-box;
+            transition: 1s;
+            transform: rotateY(180deg);
+            transform-style: preserve-3d;
+        }
+        .wrapper .item:first-child {
+            transform: translateZ(-1px) rotateY(180deg);
+        }
+        .wrapper .item:last-child {
+            background-image: url(poker.jpg);
+            background-size: 100% 100%;
+        }
+        .wrapper:nth-of-type(5) {
+            transform: rotateY(0deg);
+        }
+        .item {
+            position: absolute;
+            width: 100px;
+            height: 140px;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 140px;
+            color: #fff;
+            font-size: 30px;
+        }
+        span { color: red; }
+        .btn:after {
+            content: '';
+            position: absolute;
+            top: 20px;left: 0;
+            width: 100px;
+            height: 100px;
+            box-sizing: border-box;
+            border: 5px solid pink;
+            border-radius: 25%;
+        }
+        .price {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 150px;
+            border-radius: 100px;
+            background-color: rgba(0, 0, 0, .8);  
+            text-align: center;
+            line-height: 150px;
+            color: #fff;
+            font-size: 30px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="parent clearfix"></div>
+        <div class="price"></div>
+    </div>
+
+    <script>
+    
+        var arr = [];//定位
+        var index = [0,1,2,3,5,6,7,8];//下标
+        var n = 0;//翻转
+        var flag = false;
+        var isTrue = false;
+        // 创建
+        for (let i = 0; i < 9; i++) {
+            $('.parent').append($('<div>').addClass('wrapper'));
+            for (let j = 0; j < 2; j++) {
+                $('.wrapper').eq(i).append($('<div>').addClass('item'));
+                $('.wrapper').eq(i).children().first().css({
+                    'background': `url(images/${i+1}.jpg)`,
+                    'background-size': '100% 100%',
+                }).html(`<span>${ i + 1 } </span> 等奖`);
+            }  
+        }
+        $('.wrapper').eq(4).addClass('btn').html($('<span>').html('抽奖'));
+
+
+        // 定位
+        for (let i = 0; i < $('.wrapper').length; i++) {
+            $('.wrapper').eq(i).css({
+                'left': `${ i % 3 * 140 + 20 }px`,
+                'top': `${ parseInt(i / 3) * 180 + 20}px`,
+                'zIndex': i + 20,
+            }); 
+
+            // 存储定位位置
+            arr.push($('.wrapper').eq(`${i}`).css('left'));
+            arr.push($('.wrapper').eq(i).css('top'));            
+        }
+        // 去除抽奖按钮
+        arr.splice(7, 2);
+
+
+         // 点击抽奖按钮
+        $('.btn').click(function () {            
+            if (flag) return;
+            flag = !flag;
+            n++;
+
+            // 收起纸牌
+            $('.wrapper').not('.btn').css({
+                'transition': '1s',
+                'transform': 'rotateY(' + 180 * (n + 1) + 'deg)',
+            });
+
+            // 随机纸牌后回到初始
+            setTimeout(() => {
+                $('.wrapper').not('.btn').css({
+                    'left': $('.btn').css('left'),
+                    'top': $('.btn').css('top'),
+                });                  
+            }, 1000);
+
+            // 获取随机下标
+            index.sort(function ab(a, b) {
+                return Math.random() - Math.random();
+            });
+
+            // 展开纸牌
+            for (let i = 0; i < $('.wrapper').length - 1; i++) {
+                setTimeout(() => {
+                    $('.wrapper').eq(index[i]).css({
+                        'left': arr[i * 2],
+                        'top': arr[i * 2 + 1],
+                    });
+                }, 2000);                         
+            }
+
+            // 开始抽奖后延迟2.5s，过渡结束后，才能选择奖品
+            setTimeout(() => {                    
+                isTrue = true;
+            }, 2500);
+        });           
+
+
+        // 选择奖品
+        $('.wrapper').not('.btn').click( function () {  
+            if (!isTrue) return;
+            flag = !flag;                             
+            n++;
+            $(this).css({
+                'transform': 'rotateY(' + 180 * (n + 1) + 'deg)',
+                'transition': '1s',
+            }).siblings().not('.btn').css({
+                'transition': '1s 1s',
+                'transform': 'rotateY(' + 180 * (n + 1) + 'deg)',
+            });
+            $('.price').fadeIn(1000).html(`恭喜中得：<span>${$(this).find('span').text()} </span> 等奖`).delay(1000).fadeOut(1000);
+            isTrue = false;
+        });
+   
+       
+    </script>
+
+</body>
+</html>

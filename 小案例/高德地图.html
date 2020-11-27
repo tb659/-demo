@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="gmap" class="gmap" style="width: 100%; height: 500px;"></div>
+    <input type="text" placeholder="经度" name="lng" class="form-control" />
+    <input type="text" placeholder="纬度" name="lat" class="form-control" />
+    <input type="text" placeholder="地址" name="address" class="form-control" />
+
+    <script type="text/javascript" src="./jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=630c9b58540b5b07ad9557e3f6c654fa&plugin=AMap.Geocoder"></script>
+
+    <script type="text/javascript">
+      var map = new AMap.Map('gmap', {
+        zoom: 12,
+        center: [116.397428, 39.90923],
+      })
+
+      AMap.plugin(['AMap.ToolBar', 'AMap.Scale'], function () {
+        var toolBar = new AMap.ToolBar()
+        var scale = new AMap.Scale()
+        map.addControl(toolBar)
+        map.addControl(scale)
+      })
+
+      var marker = new AMap.Marker({
+        position: map.getCenter(),
+        draggable: true,
+        cursor: 'move',
+        raiseOnDrag: false,
+        zIndex: 101,
+      })
+      marker.setMap(map)
+
+      $('input[name=lng]').val(marker.getPosition().lng)
+      $('input[name=lat]').val(marker.getPosition().lat)
+
+      AMap.event.addListener(marker, 'dragstart', function (e) {
+        $('input[name=lng]').val(marker.getPosition().lng)
+        $('input[name=lat]').val(marker.getPosition().lat)
+      })
+
+      AMap.event.addListener(marker, 'dragging', function (e) {
+        $('input[name=address]').val('检索地址中......')
+        $('input[name=lng]').val(marker.getPosition().lng)
+        $('input[name=lat]').val(marker.getPosition().lat)
+      })
+
+      AMap.event.addListener(marker, 'dragend', function (e) {
+        $('input[name=lng]').val(marker.getPosition().lng)
+        $('input[name=lat]').val(marker.getPosition().lat)
+        lnglatXY = [marker.getPosition().lng, marker.getPosition().lat]
+        var geocoder = new AMap.Geocoder({
+          radius: 1000,
+          extensions: 'all',
+        })
+        geocoder.getAddress(lnglatXY, function (status, result) {
+          if (status === 'complete' && result.info === 'OK') {
+            var address = result.regeocode.formattedAddress //返回地址描述
+            $('input[name=address]').val(address)
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

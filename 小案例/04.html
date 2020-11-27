@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body></body>
+</html>
+<script>
+  let str = 'http://x.x.x/?a=100&b=200&c=300'
+  function serializerUrl(str) {
+    let json = {}
+    const a = str.slice(str.indexOf('?') + 1).split('&')
+    a.map((item) => {
+      json[item.split('=')[0]] = item.split('=')[1]
+    })
+    return json
+  }
+  console.log(serializerUrl('http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx'))
+
+  //
+
+  //
+
+  function str2obj(str) {
+    var jsonArr = []
+    if (str.indexOf('|') === -1) {
+      var temp = str.split('%')
+      jsonArr.push({ resultName: temp[0], resultNo: temp[1], editName: false, editCode: false })
+    } else {
+      var arr = str.split('|')
+      arr.map((i) => {
+        var temp = i.split('%')
+        jsonArr.push({ resultName: temp[0], resultNo: temp[1], editName: false, editCode: false })
+      })
+    }
+    return jsonArr
+  }
+
+  var json = str2obj('名字1%ASD|名字2%ESFG')
+  console.log(json)
+
+  function obj2str(obj) {
+    // console.log(obj)
+    var str = ''
+    obj.map((item) => {
+      console.log(item)
+      str += item.resultName + '%' + item.resultNo + '|'
+    })
+    return str.slice(0, str.length - 1)
+  }
+
+  var strrr = obj2str(json)
+  console.log(strrr)
+</script>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+
+</html>
+<script>
+
+    // var a = {}
+    // var b = {
+    //     key: 'a'
+    // }
+    // var c = {
+    //     key: 'c'
+    // }
+    // a[b] = '123'
+    // // a = {
+    // //     b : '123'
+    // // }
+    // a[c] = '456'
+    // // a = {
+    // //     c : '456'
+    // // }
+    // console.log(a);
+    // console.log(b);
+    // console.log(c);        
+    // console.log(a[b]); //456    
+
+
+
+    // var a = 10;
+    // function fn() {
+    //     a++
+    //     console.log(a); // NaN
+    //     var a = 20;
+    //     console.log(++a); // 21
+    // }
+    // fn()
+    // console.log(a); // 10
+
+
+    // var a = 10;
+    // var b = 20;
+    // function fn(){  
+    //     a++;
+    //     b--;
+    //     if (a + b > 30) {
+    //         var a = 50;
+    //     } else {
+    //         var b = 60;
+    //     }
+
+    //     m = a++ + ++b;
+    //     console.log(a, b, m); // NaN 61 NaN
+    // }
+    // fn()
+    // console.log(a, b, m); // 10 20 NaN
+
+
+    // var a = 10;
+    // var b = 20;
+    // function fn(a, b) {
+    //     a++;
+    //     b--;
+    //     console.log(a, b);
+
+    //     for (var a = 10; a > 0, b < 15; a++ , b--) {
+    //         c = a + b;
+    //     }
+    //     console.log(a, b, c);
+    // }
+    // fn();
+    // console.log(a, b, c);
+    window.status = '已经选中该文本框'
+
+
+
+
+    var str = "<div>这里是div<p>里面的段落</p></div>";
+    var reg = /<\/?\w+\/?>/gi;
+    var str = "<div>这里是div<p>里面的段落</p></div>";
+    alert(str.replace(reg, ""));
+
+</script>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  var o1 = { a: 1, b: 2 }
+  var o2 = { c: 3, b: 4, e: { f: 5 } }
+  var o3 = Object.assign({}, o1)
+  var o4 = Object.assign({}, o2)
+  o3.a = 11
+  o4.a = 11
+  console.log(o2)
+  o4.e.f = 55
+  console.log(o2)
+
+  function deepClone(origin) {
+    if (!isObject(origin)) return origin
+    let target = isArray(origin) ? [] : {}
+    for (var key in origin) {
+      var value = origin[key]
+      if (isObject(value)) {
+        target[key] = deepClone(value)
+      } else {
+        target[key] = value
+      }
+    }
+
+    function isArray(any) {
+      return Array.isArray(any)
+    }
+    function isObject(any) {
+      return any.toString() === '[object Object]'
+    }
+    return target
+  }
+  o5 = deepClone(o2)
+  o5.e = 5
+  console.log(o1)
+  console.log(o2)
+  console.log(o3)
+  console.log(o4)
+  console.log(o5)
+  console.log()
+</script>

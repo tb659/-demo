@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>文本获取</title>
+</head>
+
+<body>
+  <div>
+    <input type="file" multiple>
+    <p></p>
+  </div>
+
+  <script>
+
+    const file = document.querySelector('input');
+    const info = document.querySelector('p');
+    file.onchange = function () {
+      console.log(this.files)
+
+      const render = new FileReader()
+
+      render.readAsText(this.files[0])
+
+      render.onload = function () {
+        console.log(this.result)
+
+        info.innerHTML = this.result
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

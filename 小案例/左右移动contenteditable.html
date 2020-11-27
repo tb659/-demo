@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .item {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #000;
+            float: left;
+        }
+        .cont {
+            width: 100px;
+            float: left;
+            padding: 20px;
+            text-align: center;
+        }
+        .cont p {
+            font-size: 20px;
+        }
+    </style>
+    <script src="jquery-3.0.0.min.js"></script>
+</head>
+<body>
+    <div contenteditable="true" class="item left"></div>
+    <div class="cont">
+        <button>把文字右移</button>
+        <p><span>0 </span> / <span> 0</span></p>
+    </div>
+    <div class="item right"></div>
+
+</body>
+
+<script>
+    var str = '';
+    $('.left')[0].oninput = function() {
+        console.log($(this).html());
+        str = $(this).html();        
+    }
+    $('button').click(function() {
+        var n = 0;
+        tid = setInterval(() => {
+            n++;
+            if (n > str.length) {
+                clearInterval(tid);
+                return;
+            }
+            $('p span').first().html(n);
+            $('p span').last().html(str.length);
+            $('.right').html(str.substring(0,n));
+            $('.left').html(str.substring(n))           
+        }, 1000);       
+    });
+</script>
+</html>

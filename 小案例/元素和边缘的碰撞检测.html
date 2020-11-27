@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>元素与边缘的碰撞检测</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overflow: hidden;
+      }
+      div {
+        width: 100px;
+        height: 100px;
+        background: rgb(0, 0, 0);
+        position: absolute;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div></div>
+    <script>
+      const oDiv = document.getElementsByTagName('div')[0]
+      let speedX = 6
+      let speedY = 8
+
+      function move() {
+        // let currentLeft = oDiv.offsetLeft
+        // let currentTop = oDiv.offsetTop
+
+        checkBorder(oDiv)
+
+        oDiv.style.left = oDiv.offsetLeft + speedX + 'px'
+        oDiv.style.top = oDiv.offsetTop + speedY + 'px'
+      }
+
+      function checkBorder(el) {
+        let windowWidth = window.innerWidth
+        let windowHeight = window.innerHeight
+
+        let currentLeft = oDiv.offsetLeft
+        let currentTop = oDiv.offsetTop
+        let elWidth = el.offsetWidth
+        let elHeight = el.offsetHeight
+
+        // 元素与屏幕左侧的碰撞检测
+        if (currentLeft < 0) {
+          currentLeft = 0
+          speedX *= -1
+        }
+
+        // 元素与屏幕上侧的碰撞检测
+        if (currentTop < 0) {
+          currentTop = 0
+          speedY *= -1
+        }
+
+        // 元素与屏幕右侧的碰撞检测
+        if (currentLeft > windowWidth - elWidth) {
+          currentLeft = windowWidth - elWidth
+          speedX *= -1
+        }
+
+        // 元素与屏幕下侧的碰撞检测
+        if (currentTop > windowHeight - elHeight) {
+          currentTop = windowHeight - elHeight
+          speedY *= -1
+        }
+      }
+
+      // move()
+      setInterval(move, 30)
+    </script>
+  </body>
+</html>

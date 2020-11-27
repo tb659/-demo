@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="box">
+    {{arr}}
+    <div v-for="i in arr">1
+      <template slot-scope='scope'>
+        <div>{{i}}</div>
+      </template>
+    </div>
+  </div>
+  <script src="./vue.js"></script>
+  <script>
+    new Vue({
+      el: '#box',
+      data: {
+        arr: [
+          { a: 12, b: 13 },
+          { a: 22, b: 23 },
+          { a: 32, b: 33 }
+        ]
+      },
+      methods: {
+
+      }
+    });
+  </script>
+</body>
+
+</html>

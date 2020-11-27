@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+    <title>表单提交</title>
+  </head>
+  <body>
+    <div id="app">
+      <el-form :model="person" ref="person" label-width="100px">
+        <el-form-item label="年龄" prop="age">
+          <el-input type="age" v-model="person.age"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('person')">提交</el-button>
+          <el-button @click="resetForm('person')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          person: {
+            age: '',
+          },
+        }
+      },
+      methods: {
+        submitForm(formName) {
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              console.log(valid)
+              console.log(this.numberValidateForm)
+            } else {
+              console.log('error submit!!')
+              return false
+            }
+          })
+        },
+        resetForm(formName) {
+          this.$refs[formName].resetFields()
+        },
+      },
+    })
+  </script>
+</html>

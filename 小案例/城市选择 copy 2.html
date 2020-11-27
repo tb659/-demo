@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      [v-cloak] {
+        display: none;
+      }
+      .privence {
+        display: inline-block;
+        width: 120px;
+        padding: 20px;
+        position: relative;
+      }
+      .city_cont {
+        width: 260px;
+        position: absolute;
+        padding: 20px;
+        background-color: #fff;
+        z-index: 11;
+        border: 1px solid #000;
+        border-radius: 10px;
+      }
+      .city_cont div {
+        padding: 4px;
+        display: inline-block;
+      }
+    </style>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+  </head>
+  <body>
+    <div id="box" v-cloak>
+      <el-button type="primary" @click="dialogVisible = true">添加数据</el-button>
+      <el-dialog title="提示" :visible.sync="dialogVisible" width="50%">
+        <div>
+          <div class="privence" v-for="(privence, privenceIndex) in list" :key="privence.id" @mouseenter="showCity(privenceIndex)" @mouseleave="hideCity">
+            <el-checkbox :indeterminate="privence.isIndeterminate" v-model="privence.checkAll" @change="privenceChange(privenceIndex)"> {{privence.name}}</el-checkbox>
+            <div class="city_cont" v-show="privenceIndex == curIndex">
+              <div v-for="(city, cityIndex) in privence.children" :key="city.id">
+                <el-checkbox v-model="city.isChecked" @change="cityChange(privenceIndex, cityIndex)"> {{city.name}} </el-checkbox>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="handleChange">确 定</el-button>
+        </span>
+      </el-dialog>
+    </div>
+    <script src="vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="城市数据.js"></script>
+    <script>
+      new Vue({
+        el: '#box',
+        data() {
+          return {
+            dialogVisible: true,
+            list: [],
+            curIndex: -1,
+          }
+        },
+        methods: {
+          handleChange() {
+
+            this.list.map((privence,privenceIndex) => {
+              if (privence.isIndeterminate) {
+
+              }
+            })
+            this.dialogVisible = false
+          },
+
+          privenceChange(privenceIndex) {
+            let privence = this.list[privenceIndex]
+            privence.children.map((cities) => {
+              if (privence.checkAll) {
+                cities.isChecked = true
+              } else {
+                cities.isChecked = false
+              }
+            })
+          },
+
+          cityChange(privenceIndex, cityIndex) {
+            console.log(this.list[privenceIndex].children[cityIndex].isChecked)
+            let cities = this.list[privenceIndex].children
+            let city = cities.filter((city) => city.isChecked)
+            // console.log(city)
+            if (city.length) {
+              if (city.length !== cities.length) {
+                this.list[privenceIndex].isIndeterminate = true
+              } else {
+                this.list[privenceIndex].isIndeterminate = false
+                this.list[privenceIndex].checkAll = true
+              }
+            } else {
+              this.list[privenceIndex].checkAll = false
+            }
+          },
+
+          hideCity() {
+            this.curIndex = -1
+          },
+
+          showCity(index) {
+            this.curIndex = index
+          },
+        },
+        mounted() {
+          this.list = dataList.data[0]
+          this.list.map((privence) => {
+            privence.checkedCities = []
+            privence.children.map((city) => {
+              city.children = []
+            })
+          })
+
+          console.log(this.list)
+        },
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      img {
+        vertical-align: top;
+      }
+
+      button {
+        display: inline-block;
+        width: 80px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        font-size: 20px;
+      }
+
+      .no1-leave,
+      .no1-enter-to {
+        left: 0 !important;
+        opacity: 1;
+      }
+
+      .no1-leave-active,
+      .no1-enter-active {
+        transition: all 1s;
+      }
+
+      .no1-leave-to {
+        left: -300px !important;
+        opacity: 0;
+      }
+
+      .no1-enter {
+        left: 300px !important;
+        opacity: 0;
+      }
+
+      .no2-leave,
+      .no2-enter-to {
+        left: 0 !important;
+        opacity: 1;
+      }
+
+      .no2-leave-active,
+      .no2-enter-active {
+        transition: all 1s;
+      }
+
+      .no2-leave-to {
+        left: 300px !important;
+        opacity: 0;
+      }
+
+      .no2-enter {
+        left: -300px !important;
+        opacity: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <img src="./中文.jpg" alt="">
+    <div id="app">
+      <div style="text-align: center;">
+        <button @click="btn1">下一个</button> {{index}} <button @click="btn2">上一个</button> <br />
+        <div style="display: inline-block; width: 600px; height: 350px; position: relative;">
+          <transition :name="tName" v-for="(i, $i) in arr">
+            <img v-show="index==$i" :src="i" alt="" width="100%" height="100%" style="position: absolute; left: 0;" />
+          </transition>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        tName: 'no1',
+        index: 0,
+        type: true,
+        arr: [
+          'https://tse4-mm.cn.bing.net/th?id=OIP.T_uUqIsHL6f7Tp2NMV-wWwHaEo&w=286&h=177&c=7&o=5&pid=1.7',
+          'https://tse4-mm.cn.bing.net/th?id=OIP.Ax5LyHboqt429UfJGzZFWQHaEo&w=287&h=177&c=7&o=5&pid=1.7',
+          'https://tse1-mm.cn.bing.net/th?id=OIP.y54xc9yCvm0GGQZZlWCiYwHaEo&w=287&h=177&c=7&o=5&pid=1.7',
+          'https://tse3-mm.cn.bing.net/th?id=OIP.QMrDD9rsldHtKlGf4Jo8OgHaEK&w=300&h=168&c=7&o=5&pid=1.7',
+        ],
+      },
+      methods: {
+        btn1() {
+          this.tName = 'no1'
+          if (this.type) {
+            this.index++
+            if (this.index >= this.arr.length) {
+              this.index = 0
+            }
+            this.type = false
+            setTimeout(() => {
+              this.type = true
+            }, 1000)
+          }
+        },
+        btn2() {
+          this.tName = 'no2'
+          if (this.type) {
+            this.index--
+            if (this.index <= -1) {
+              this.index = this.arr.length - 1
+            }
+            this.type = false
+            setTimeout(() => {
+              this.type = true
+            }, 1000)
+          }
+        },
+      },
+    })
+  </script>
+</html>

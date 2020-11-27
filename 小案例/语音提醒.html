@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  document.documentElement.onclick = function () {
+    console.log('语音')
+    var mess = '语音合成测试'
+
+    var msg = new SpeechSynthesisUtterance(mess)
+
+    msg.volume = 100 // 声音的音量
+    msg.rate = 1 // 语速，数值，默认值是1，范围是0.1到10
+
+    msg.pitch = 1.5 // 表示说话的音高，数值，范围从0（最小）到2（最大）。默认值为1
+
+    speechSynthesis.speak(msg)
+  }
+  // document.documentElement.onclick = function () {
+  //   console.log('语音')
+  //   var msg = new SpeechSynthesisUtterance('你有一个新的订单，请尽快接单')
+  //   speechSynthesis.speak(msg)
+  // }
+
+  // window.onload = function () {
+  //   console.log('加载')
+  //   document.documentElement.onclick = function () {
+  //     console.log('语音')
+  //     var msg = new SpeechSynthesisUtterance('你有一个新的订单，请尽快接单')
+  //     speechSynthesis.speak(msg)
+  //   }
+  // }
+</script>

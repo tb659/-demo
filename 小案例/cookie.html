@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cookie</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+
+  // 设置cookie
+  function setCookie(key, val, day) {
+    const d = new Date()
+    d.setDate(d.getDate() + day)
+    document.cookie = `${key} = ${val}; expires=${day}`
+  }
+  setCookie('车牌号', 'mt659', 2)
+
+  // 获取cookie
+  function getCookie() {
+    const json = {}
+    const arr = document.cookie.split(';')
+    arr.map(item => {
+      const tmp = item.split('=')
+      json[tmp[0]] = tmp[1]
+    })
+    return json
+  }
+  console.log(getCookie());
+
+  // 删除cookie
+  function delCookie(key) {
+    setCookie(key,'' , -1)
+  }
+
+</script>

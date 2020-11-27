@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>class</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+
+	
+  // 原型继承: 子类别的原型等于父类别的一个实例  将父类别的属性和方法都继承到子类别的原型上 
+
+		function Person(name, sex) {
+			this.name = name;
+			this.sex = sex;
+		}
+		Person.prototype.eat = function(){
+			console.log('吃');
+		}
+
+		function Student( num) {
+			this.num = num;
+		}
+
+		Student.prototype = new Person('mt', '男');
+
+		// 使用对象的属性和方法时: 优先使用实例属性/方法  如果没有就是使用原型 如果原型上还没有  就使用父类的原型上的属性/方法 直到找到Object的原型
+
+		let s1 = new Student(111);
+		console.log(s1.name);
+		console.log(s1.sex);
+		s1.eat();
+
+		let s2 = new Student(112);
+		// console.log(s2.name);
+
+
+
+
+
+
+
+
+
+
+
+/* 
+模板
+    class 类名 {
+      constructor() {
+        私有属性。。。
+      }
+      function 方法名 {
+        。。。
+      }
+    }
+    new 类名()
+*/
+
+
+// class Person {
+//   constructor(x,y,z) {
+//     this.name = 'mt'
+//     // console.log(this);
+//     console.log(x,y,z);
+//   }
+//   showName () {
+//     alert(this.name)
+//   }
+// }
+// const one = new Person(1,[1,2],{a:10})
+// console.log(one.name);
+// one.showName();
+
+
+
+
+/* 
+
+  类        class
+  原型链    prototype 方法
+  原型链    __proto__
+
+  
+
+  类 -> 分类
+
+  人：            -->  吃 睡
+      黄种人
+      白种人
+      黑种人     
+  动物：          -->  吃
+      食肉动物
+      食草动物      
+  数据类型：
+      string      indexOf subString
+      array       splice pop concat 
+      function    bind call apply
+
+  通过类 可以找到原型
+    Array.prototype
+  通过类下面的东西 找到类
+    [1,2,3].constructor
+
+  constructor 精准的找到是什么类
+  Object.prototype.toString.call()
+
+  window object   --array -- [1,2,3].toSting()
+                  --number
+
+  toString()
+  console.log(Object.prototype.toString.call(1)); // [object Number]
+  console.log(Object.prototype.toString.call([1])); 
+  console.log(Object.prototype.toString.call(null));
+  console.log(Object.prototype.toString.call(undefined));
+  function fn() {  
+    console.log(Object.prototype.toString.call(arguments));
+  }
+  fn()
+  */
+ 
+</script>

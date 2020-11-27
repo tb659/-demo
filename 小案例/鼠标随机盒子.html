@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="jquery_1.12.4.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .item {
+        position: absolute;
+        border: 1px dotted #000;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      $(window).mousedown(function (e) {
+        var downX = 0 // 鼠标按下时的x值
+        var downY = 0 // 鼠标按下时的y值
+        var upX = 0 // 鼠标抬起时的x值
+        var upY = 0 // 鼠标抬起时的y值
+        var moveX = 0 // 横向移动的x值
+        var moveY = 0 // 纵向移动的y值
+
+        // 按下时确定div的位置，并添加进body
+        downX = e.pageX
+        downY = e.pageY
+        var div = $('<div>').addClass('item')
+        div.css({ left: downX, top: downY }).appendTo($('body'))
+
+        $(window).mousemove(function (e) {
+          // 获取移动距离为div的宽高
+          moveX = e.pageX - downX
+          moveY = e.pageY - downY
+          // 判断点下的x，y和移动后的x，y之间的正负
+          // 为负时，让宽高为反值，位置为点下的位置减去移动的距离
+          div.css({
+            width: `${e.pageX - downX > 0 ? moveX : -moveX}px`,
+            height: `${e.pageY - downY > 0 ? moveY : -moveY}px`,
+            left: `${e.pageX - downX > 0 ? downX : downX + moveX}px`,
+            top: `${e.pageY - downY > 0 ? downY : downY + moveY}px`,
+          })
+        })
+        $(window).mouseup(function (e) {
+          $(window).off('mousemove')
+          $('.item')
+            .last()
+            .css({
+              background: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, ${Math.random()})`,
+              border: 'none',
+            })
+        })
+      })
+    </script>
+  </body>
+</html>

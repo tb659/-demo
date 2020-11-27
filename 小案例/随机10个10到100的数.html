@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+</body>
+
+</html>
+
+<script>
+
+  function ranNum(arr, len, min, max) {
+    if (len >= max - min) return "个数超出"
+    if (arr.length >= len) return arr.sort((a, b) => { return a - b })
+    var num = parseInt(Math.random() * (max - min + 1) + min)
+    for (let i = 0; i < arr.length; i++) {
+      if (num == arr[i]) {
+        ranNum(arr, len, min, max)
+        return
+      }
+    }
+    arr.push(num)
+    ranNum(arr, len, min, max)
+    return arr
+  }
+  let arr = ranNum([], 10, 10, 100)
+  console.log(arr);
+
+let str = "12345"
+
+
+</script>

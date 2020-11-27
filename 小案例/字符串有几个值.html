@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body></body>
+</html>
+
+<script>
+  const str = 'aaabbaccabbcbb'
+  function fn(str) {
+    var json = {}
+    for (let i = 0; i < str.length; i++) {
+      if (json[str[i]]) {
+        json[str[i]] = json[str[i]] + 1
+      } else {
+        json[str[i]] = 1
+      }
+    }
+    console.log(json)
+
+    let pamarStr = ''
+    // Object.keys(json).map(key => {
+    //   pamarStr += key + '=' + json[key] + '&'
+    // })
+
+    for (const key in json) {
+      pamarStr += key + '=' + json[key] + '&'
+    }
+
+    pamarStr = pamarStr.substr(0, pamarStr.length - 1)
+    console.log(pamarStr)
+
+    let Str = ''
+    for (let key in json) {
+      Str += `${key}有${json[key]}个，`
+    }
+    console.log(Str)
+  }
+  fn(str)
+</script>

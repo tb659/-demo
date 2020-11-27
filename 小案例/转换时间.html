@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    var oldTime = new Date('2019-10-31 22:50:00').getTime();
+    // var result = 0;
+    function TimeAgo(oldTime) {
+        var mistiming = Math.round(new Date()) - oldTime;
+        var arrr = ['年', '个月', '星期', '天', '小时', '分钟', '秒'];
+        var arrn = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
+        for (var i = 6; i >= 0; i--) {
+            var inm = Math.floor(mistiming / 1000 / arrn[i]);
+            if (inm != 0) {
+                var result =  inm + arrr[i] + '前';
+            }
+        }
+        return result;
+    }
+    console.log(TimeAgo(oldTime));
+</script>

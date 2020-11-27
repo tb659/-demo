@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body></body>
+</html>
+<script>
+  function toRMB(num) {
+    let str = num + '' //转成字符串
+    let a = str.length % 3 //模3取余
+    let result = '' //最终结果
+    a = a == 0 ? 0 : a == 1 ? 2 : 1 //判断添加0的个数
+
+    for (let i = 0; i < a; i++) {
+      str = '0' + str
+    }
+
+    for (let i = 1; i <= str.length; i++) {
+      result += str[i - 1]
+      if (i % 3 == 0 && i != str.length) {
+        result += ','
+      }
+    }
+    return (result = result.slice(a))
+  }
+  console.log(toRMB(1234567868))
+
+  // function re(num) {
+  //   let str = num + ""
+  //   return str.split("").reverse().join("")
+  // }
+
+  // function toRMB(num) {
+  //   let a = "";
+  //   for (let i = 1; i <= re(num).length; i++) {
+  //     a += re(num)[i - 1]
+  //     if (i % 3 == 0 && i != re(num).length) {
+  //       a += ","
+  //     }
+  //   }
+  //   return a
+  // }
+
+  // console.log(toRMB(num));
+</script>

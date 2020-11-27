@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+class Foo11 {
+  constructor() {
+    return Object.create(null);
+  }
+}
+
+console.log(new Foo11() instanceof Foo11);
+// false
+
+  // class只是一个语法糖，类的所有方法都定义都在类的prototype属性上，
+  // 本质是通过ES5的原型链继承实现的
+
+
+  // JavaScript语言中,生成实例对象的传统方法是通过构造函数.
+
+  // function Point1(x, y) {
+  //   this.x = x;
+  //   this.y = y;
+  // }
+
+  // Point1.prototype.toString = function () {
+  //   console.log('(' + this.x + ', ' + this.y + ')');
+  // };
+
+
+  // var p1 = new Point1(1, 2);
+  // console.log(p1);
+  // p1.toString();
+
+  // // es6 语法糖 class 关键字
+  // class Point2 {
+  //   constructor(x, y) {
+  //     this.x = x;
+  //     this.y = y;
+  //   }
+
+  //   toString() {
+  //   console.log('(' + this.x + ', ' + this.y + ')');
+  //   }
+  // }
+
+  // var p2 = new Point2(1, 2);
+  // console.log(p2);
+  // p2.toString();
+
+
+  // // 类的数据类型就是函数,类本身就指向构造函数
+
+  // console.log(typeof Point2);
+  // console.log(Point2 === Point2.prototype.constructor);
+
+
+
+  /*
+      constructor方法---->构造方法, 而this关键字则代表实例对象.
+      construtor方法是类的默认方法, 通过new命令生成对象实例时, 自动调用该方法.
+      一个类必须有constructor方法, 如果没有显示定义, 一个空的constructor方法会被默认添加.
+      constructor方法默认返回实例对象(即this), 完全可以指定返回另外一个对象
+  */
+
+
+  /* 
+    Class的静态方法
+      类相当于实例的原型,所有在类中定义的方法,都会被实例继承.如果在一个方法前,加上static关键字,就表示该方法不会被实例继承,而是直接通过类来调用,这就成为"静态方法".
+      注意:如果静态方法包含this关键字,这个this指的是类,而不是实例
+   */
+
+  // class Foo1 {
+  //   bar() {
+  //     console.log(this);
+  //   }
+  // }
+  // new Foo1().bar() // hello
+
+  // class Foo2 {
+  //   static bar() {
+  //     console.log(this);
+  //   }
+  // }
+  // Foo2.bar() // hello
+
+  // /* 
+  // 类的静态属性
+  //   在实例写法前面加上static关键字
+  // */
+  // class MyClass2 {
+  //   static y = 10
+  //   constructor() {
+  //     console.log(MyClass2.y);
+  //   }
+  // }
+  // const m2 = new MyClass2()
+
+
+
+
+
+  // 私有方法是常见需求，但ES6不提供，只能通过变通方法模拟实现
+
+  // 在命名上加以区别
+  class Widget {
+
+    // 公有方法
+    foo(baz) {
+      this._bar(baz);
+    }
+
+    // 私有方法
+    _bar(baz) {
+      return this.snaf = baz;
+    }
+  }
+  // _bar方法前面的下划线，表示这是一个只限于内部使用的私有方法。
+  // 但是，这种命名是不保险的，在类的外部，还是可以调用到这个方法。
+
+  // 另一种方法就是索性将私有方法移出模块，因为模块内部的所有方法都是对外可见的
+  class Widget2 {
+    foo(baz) {
+      bar.call(this, baz);  //注意这里改变bar内部this的指向
+    }
+
+    // ...
+  }
+
+  function bar(baz) {
+    return this.snaf = baz;
+  }
+  // foo是公有方法，内部调用了bar.call(this, baz)。
+  // 这使得bar实际上成为了当前模块的私有方法
+
+
+
+
+  // 没有变量提升   
+  // new Mt() // 报错
+  class Mt {
+
+  }
+</script>

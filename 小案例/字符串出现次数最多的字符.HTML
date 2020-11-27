@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body></body>
+</html>
+<script>
+  var str = 'asdfssaaasasasasaa'
+
+  let json = {}
+  let count = 0
+  let item = ''
+
+  for (let i = 0, len = str.length; i < len; i++) {
+    json[str.charAt(i)] ? json[str.charAt(i)]++ : (json[str.charAt(i)] = 1)
+  }
+  console.log(json)
+  for (const key in json) {
+    if (json[key] > count) {
+      count = json[key]
+      item = key
+    }
+  }
+  console.log(item, count)
+</script>

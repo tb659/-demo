@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      button {
+        width: 3.5rem;
+        height: 0.4rem;
+        font-size: 0.16rem;
+        border-radius: 0.1rem;
+        margin-left: 0.125rem;
+      }
+      #app {
+        font-size: 0.16rem;
+      }
+      [v-cloak] {
+        display: none;
+      }
+      .cont {
+        border-bottom: 0.01rem solid #ccc;
+        margin-bottom: 0.4rem;
+      }
+      .item {
+        width: 3.75rem;
+        padding: 0.1rem;
+        box-sizing: border-box;
+        display: flex;
+      }
+      .item:nth-of-type(2n) {
+        background-color: #fff;
+      }
+      .item:nth-of-type(2n + 1) {
+        background-color: #eee;
+      }
+      .label {
+        width: 0.8rem;
+        text-align: right;
+        margin-right: 0.1rem;
+      }
+      .info {
+        width: 2.65rem;
+      }
+      /* 时间线 */
+      .el-timeline {
+        margin: 0;
+        font-size: 0.14rem;
+        list-style: none;
+      }
+      .el-timeline-item {
+        position: relative;
+        padding-bottom: 0.2rem;
+        display: flex;
+        align-items: center;
+      }
+      .el-timeline-item__tail {
+        position: absolute;
+        z-index: 1;
+        left: 0.04rem;
+        height: 100%;
+        border-left: 0.02rem solid #e4e7ed;
+      }
+      .el-timeline-item__node--normal {
+        left: -0.01rem;
+        width: 0.12rem;
+        height: 0.12rem;
+        border-radius: 50%;
+        position: relative;
+        z-index: 2;
+        background-color: #ccc;
+      }
+      .el-timeline-item__wrapper {
+        width: 100%;
+        position: relative;
+        padding-left: 0.28rem;
+        top: -0.03rem;
+      }
+      .el-timeline-item__content {
+        color: #303133;
+      }
+      .el-row {
+        display: flex;
+      }
+      .el-col-12 {
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <div class="cont">
+        <div class="item">
+          <div class="label">报警时间：</div>
+          <div class="info">{{dataForm.alertTime}}</div>
+        </div>
+        <div class="item">
+          <div class="label">报警类型：</div>
+          <div v-if="dataForm.alarmTypes === 'W'">W - 水量</div>
+          <div v-if="dataForm.alarmTypes === 'C'">C - 纸杯</div>
+          <div v-if="dataForm.alarmTypes === 'S'">S - 料仓</div>
+          <div v-if="dataForm.alarmTypes === 'E'">E - 料仓电机</div>
+          <div v-if="dataForm.alarmTypes === 'D'">D - 自动门</div>
+          <div v-if="dataForm.alarmTypes === 'M'">M - 电磁阀</div>
+          <div v-if="dataForm.alarmTypes === 'B'">B - 搅拌器</div>
+          <div v-if="dataForm.alarmTypes === 'O'">O - 其它 OTHER</div>
+        </div>
+        <div class="item">
+          <div class="label">处理人：</div>
+          <div class="info">{{ dataForm.handler }}</div>
+        </div>
+        <div class="item">
+          <div class="label">信息提醒：</div>
+          <div class="info">{{ dataForm.msgAlertTime }}</div>
+        </div>
+        <div class="item">
+          <div class="label">设备名称：</div>
+          <div class="info">{{ dataForm.deviceName }}</div>
+        </div>
+        <div class="item">
+          <div class="label">设备地址：</div>
+          <div class="info">{{ dataForm.deviceAddress }}</div>
+        </div>
+        <div class="item">
+          <div class="label">详细地址：</div>
+          <div class="info">{{ dataForm.deviceDetailAddress }}</div>
+        </div>
+        <div class="item">
+          <div class="label">公司：</div>
+          <div class="info">{{ dataForm.agent }}</div>
+        </div>
+      </div>
+      <ul class="el-timeline">
+        <li class="el-timeline-item" v-for="(item, index) in data">
+          <div>
+            <div class="el-timeline-item__tail" v-if="index !== data.length - 1"></div>
+            <div class="el-timeline-item__node el-timeline-item__node--normal el-timeline-item__node--" :style="{background: index === 0 ? 'rgb(11, 189, 135)': ''}"><!----></div>
+          </div>
+          <div class="el-timeline-item__wrapper">
+            <div class="el-timeline-item__content">
+              <div class="el-row">
+                <div class="el-col-12">{{item.content}}</div>
+                <div class="el-col-12">{{item.timestamp}}</div>
+              </div>
+            </div>
+            <div class="el-timeline-item__timestamp is-bottom"></div>
+          </div>
+        </li>
+      </ul>
+      <button @click.prevent.stop="accept">接单</button>
+    </div>
+  </body>
+  <script>
+    ;(function () {
+      document.documentElement.style.fontSize = (document.documentElement.clientWidth / 375) * 100 + 'px'
+      window.onresize = function () {
+        document.documentElement.style.fontSize = (document.documentElement.clientWidth / 375) * 100 + 'px'
+      }
+    })()
+  </script>
+  <!-- import Vue before Element -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.min.js"></script>
+  <!-- import axios -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data() {
+        return {
+          // baseURL:'http://47.103.120.158:9004/web/api',
+          BASEURL: 'http://192.168.1.9:8888/api',
+          dataForm: {
+            alertTime: '2020-02-02 02:02:02',
+            alarmTypes: 'E',
+            handler: '处理人姓名',
+            msgAlertTime: '2020-02-02 02:02:02',
+            deviceName: '设备名称',
+            deviceAddress: '江苏省南京市',
+            deviceDetailAddress: '江苏省南京市浦口区毅达汇创中心3栋1108',
+            agent: '某某代理商',
+          },
+
+          data: [
+            {
+              content: '支持使用图标',
+              timestamp: '2018-04-12 20:46',
+              size: 'large',
+              type: 'primary',
+              icon: 'el-icon-more',
+            },
+            {
+              content: '支持自定义颜色',
+              timestamp: '2018-04-03 20:46',
+              color: '#0bbd87',
+            },
+            {
+              content: '支持自定义尺寸',
+              timestamp: '2018-04-03 20:46',
+              size: 'large',
+            },
+            {
+              content: '默认样式的节点',
+              timestamp: '2018-04-03 20:46',
+            },
+          ],
+        }
+      },
+      methods: {
+        accept() {
+          console.log('点击了接受按钮')
+          app.innerHTML += `<div @click="del">12314123</div>`
+        },
+        del() {
+          console.log(111)
+        },
+      },
+      mounted() {
+        console.log('初始化')
+        console.log(axios)
+        axios
+          .post(this.BASEURL + '/user2', { params: { a: 12 } })
+          .then((res) => {
+            console.log(res)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
+    })
+  </script>
+</html>

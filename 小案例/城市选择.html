@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      [v-cloak] {
+        display: none;
+      }
+      .privence {
+        display: inline-block;
+        width: 100px;
+        padding: 20px;
+      }
+    </style>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+  </head>
+  <body>
+    <div id="box" v-cloak>
+      <el-button type="primary" @click="dialogVisible = true">添加数据</el-button>
+      <el-dialog title="提示" :visible.sync="dialogVisible" width="50%">
+        <div>
+          <div class="privence" v-for="(item, index) in dataList" :key="item.id">
+            <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+            <div style="margin: 15px 0;"></div>
+            <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
+              <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
+            </el-checkbox-group>
+          </div>
+        </div>
+
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        </span>
+      </el-dialog>
+    </div>
+    <script src="vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="城市数据.js"></script>
+    <script>
+      new Vue({
+        el: '#box',
+        data() {
+          return {
+            dialogVisible: true,
+            dataList: [],
+            checked: false,
+          }
+        },
+        methods: {
+          privenceChange(val) {
+            console.log(val)
+          },
+        },
+        mounted() {
+          this.dataList = dataList.data[0]
+          this.dataList.map((privence) => {
+            privence.checkAll = false
+          })
+
+          console.log(this.dataList)
+        },
+      })
+    </script>
+  </body>
+</html>

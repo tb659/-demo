@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  const countDownArray = [
+    { day: '00', hou: '00', min: '00', sec: '00', endDate: 1594998065381 },
+    { day: '00', hou: '00', min: '00', sec: '00', endDate: 1594997225381 },
+    { day: '00', hou: '00', min: '00', sec: '00', endDate: 1594997761381 },
+  ]
+
+  countDown(countDownArray).map((item) => {
+    const oDiv = document.createElement('div')
+    oDiv.innerHTML = `${item.day} 天 ${item.hou}:${item.min}:${item.sec}`
+    document.getElementsByTagName('body')[0].appendChild(oDiv)
+  })
+
+  // 倒计时
+
+  const timer = setInterval(() => {
+    let nowTime = new Date().getTime()
+    let surplusItem = countDownArray.filter((item) => item.endDate > nowTime)
+    if (!surplusItem.length) clearInterval(timer)
+    countDown(countDownArray).map((item, index) => {
+      const oDiv = document.getElementsByTagName('div')[index]
+      oDiv.innerHTML = `${item.day} 天 ${item.hou}:${item.min}:${item.sec}`
+    })
+  }, 1000)
+  function countDown(countDownList) {
+    // 遍历数组
+    countDownList.map((item) => {
+      let timer = formatTime(getTime(item.endDate)) // 获取天、时、分、秒
+      item.day = timeFormat(timer.day)
+      item.hou = timeFormat(timer.hou)
+      item.min = timeFormat(timer.min)
+      item.sec = timeFormat(timer.sec)
+      // endTime 结束时间（时间戳）
+      function getTime(endTime) {
+        var nowTime = new Date().getTime() //现在时间（时间戳）
+        let time = parseInt((endTime - nowTime) / 1000)
+        return time //距离结束的毫秒数
+      }
+      // 获取天、时、分、秒
+      function formatTime(time) {
+        let day = parseInt(time / (60 * 60 * 24))
+        let hou = parseInt((time % (60 * 60 * 24)) / 3600)
+        let min = parseInt(((time % (60 * 60 * 24)) % 3600) / 60)
+        let sec = parseInt(((time % (60 * 60 * 24)) % 3600) % 60)
+        let timer = { day, hou, min, sec }
+        return timer
+      }
+      //小于10的格式化函数（2变成02）
+      function timeFormat(param) {
+        param = timeFormin(param)
+        return param < 10 ? '0' + param : param
+      }
+      //小于0的格式化函数（不会出现负数）
+      function timeFormin(param) {
+        return param < 0 ? 0 : param
+      }
+    })
+    return countDownList
+  }
+</script>

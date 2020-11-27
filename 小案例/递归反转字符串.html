@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+
+
+  function rev(str1, str2) {
+    if (str1.length == 0) {
+      return str2;
+    } else {
+      str2 += str1.charAt(str1.length - 1);
+      str1 = str1.substr(0, str1.length - 1);
+      return rev(str1, str2);
+    }
+  }
+  console.log(rev("hello", ""));
+</script>

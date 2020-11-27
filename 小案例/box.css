@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+.box {
+    width: 50vw;
+    height: 50vh;
+    background: red;
+    color: black; 
+}

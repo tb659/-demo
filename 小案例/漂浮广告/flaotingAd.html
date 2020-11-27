@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./jquery_1.12.4.min.js"></script>
+    <script src="./floadingAd.js"></script>
+    <style>
+      #floatingAd .ad {
+        z-index: 100;
+        background: none;
+        position: absolute;
+        display: none;
+      }
+      #floatingAd .close {
+        display: none;
+      }
+      .floatingAd .opacity {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 25px;
+        background-color: #000;
+        opacity: 0.2;
+        filter: alpha(opacity = 20);
+      }
+      .floatingAd .text {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 25px;
+        color: #000;
+        line-height: 25px;
+      }
+      .floatingAd .text .title {
+        position: relative;
+        float: left;
+        font-size: 12px;
+        margin-left: 5px;
+      }
+      .floatingAd .text .button {
+        position: relative;
+        float: right;
+        top: 5px;
+        right: 5px;
+        width: 16px;
+        height: 16px;
+        background: url('close.png');
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="floatAdv" style="position: absolute; z-index: 10; visibility: hidden; width: 150px; height: 100px">
+      <span class="alink">
+        <p>http://www.ahbz.org.cn/info/9/91/911/2134</p>
+      </span>
+      <a class="alinka" href="#" title="安徽省质量和标准化研究院编制外人员 公开招聘公告" target="_blank">
+        <img src="https://images.pexels.com/videos/4863076/background-bath-flowers-water-4863076.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360" border="0" alt="" style="margin: 0px; padding: 0px" width="200" height="100px" />
+      </a>
+    </div>
+    <div class="floatAdv" style="position: absolute; z-index: 10; visibility: hidden; width: 150px; height: 100px">
+      <span class="alink">
+        <p>
+          <a href="http://www.ahbz.org.cn/info/9/91/911/1984">http://www.ahbz.org.cn/info/9/91/911/1984</a>
+        </p>
+      </span>
+      <a class="alinka" href="#" title="安徽省质量和标准化研究院迁址公告" target="_blank">
+        <img src="https://images.pexels.com/videos/3454829/free-video-3454829.jpg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360" border="0" alt="" style="margin: 0px; padding: 0px" width="200" height="100px" />
+      </a>
+    </div>
+  </body>
+</html>
+<script>
+  var data = [
+    { href: 'baidu.com', img: 'https://images.pexels.com/videos/4863076/background-bath-flowers-water-4863076.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360' },
+    { href: 'bilibili.com', img: 'https://images.pexels.com/videos/3454829/free-video-3454829.jpg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=250&w=360' },
+  ]
+
+  $(function () {
+    //图片信息初始化值
+    var _imgLink1 = $('.floatAdv').eq(0)
+    var _linkUrl1 = _imgLink1.children('a').attr('href')
+    var _title1 = _imgLink1.children('a').attr('title')
+    var _img1 = _imgLink1.children('a').children('img').attr('src')
+
+    //alert(_img1);
+    var _imgLink2 = $('.floatAdv').eq(1)
+    var _linkUrl2 = _imgLink2.children('a').attr('href')
+    var _title2 = _imgLink2.children('a').attr('title')
+    var _img2 = _imgLink2.children('a').children('img').attr('src')
+
+    var divFloat = $('.floatAdv')
+    if (divFloat.length == 2) {
+      $.floatingAd({
+        //频率
+        delay: 20,
+        //超链接后是否关闭漂浮
+        isLinkClosed: false,
+
+        ad: [
+          {
+            //关闭区域背景透明度(0.1-1)
+            headFilter: 0.3,
+            img: _img1,
+            imgHeight: 100,
+            imgWidth: 200,
+            linkUrl: _linkUrl1,
+            'z-index': 100,
+          },
+          {
+            img: _img2,
+            imgHeight: 100,
+            imgWidth: 200,
+            linkUrl: _linkUrl2,
+            'z-index': 101,
+          },
+        ],
+        onClose: function (elem) {},
+      })
+      $('#aa').floatingAd({
+        onClose: function (elem) {},
+      })
+    }
+  })
+</script>

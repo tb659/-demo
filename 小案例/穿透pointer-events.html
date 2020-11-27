@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #outBox {
+      width: 120px;
+      height: 120px;
+      background-color: orange;
+    }
+
+    #inBox {
+      width: 100px;
+      height: 100px;
+      background-color: rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="outBox">
+    父元素
+    <div id="inBox">
+      子元素
+    </div>
+  </div>
+</body>
+
+</html>
+<script>
+
+  outBox.onclick = function () {
+    alert('父元素')
+  }
+
+  inBox.onclick = function (e) {
+    var e = e || event
+    e.stopPropagation()
+    alert('子元素')
+  }
+
+  {
+    let a = 12
+    console.log(a)
+  }
+  {
+    let a = 1
+    console.log(a)
+  }
+
+</script>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+</head>
+
+<body></body>
+
+</html>
+<script>
+  // var a = { b: 1, c: 2 };
+  // var aa = Object.assign({}, a, { d: 3 }, { e: 4 });
+  // console.log(aa);
+  // console.log(a);
+  // console.log(1 && 0 > 1); //false
+  // console.log(Math.round(-12.1)); // 12
+
+  var xhr = null;
+  try {
+    xhr = new XMLHttpRequest();
+  } catch{
+    xhr = ActiveXObject('Microsoft.XMLHTTP');
+  }
+  xhr.open('get', 'http://localhost:1234/getData', true);
+  xhr.send();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        console.log(xhr.responseText);
+      }
+    }
+  }
+
+
+</script>

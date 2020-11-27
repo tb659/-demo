@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        .box {
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        .item {
+            height: 50px;
+            float: left;
+        }
+
+        .button {
+            width: 40px;
+            height: 30px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -20px;
+            margin-left: -15px;
+        }
+
+        span {
+            display: inline-block;
+            height: 50px;
+            position: absolute;
+
+        }
+    </style>
+    <script src="jquery_1.12.4.min.js"></script>
+</head>
+
+<body>
+    <button class="button">按钮</button>
+    <div class="box"></div>
+
+    <script>
+        var flag = false;
+        var w = $(window).width() / 20;//获取每个span宽度
+        for (var i = 0; i < 20; i++) {//获取随机颜色
+            $('<span>').css('background', 'rgb(' + color() + ',' + color() + ',' + color() + ')').appendTo($('div'));
+        }
+        function color() {	//	随机背景色
+            return Math.round(Math.random() * 255);
+        }
+        var h = $(window).height() - $('span').height()//可移动高度
+        $('span').width(w);//设置宽度        
+        $('span:odd').css('bottom', 0);// 定位
+        $('span').each(function (index, item) {
+            $(item).css('left', w * index)
+        });
+        $('button').click(function () {
+            flag = !flag;
+            if (flag) {
+                $('span:odd').stop().animate({
+                    bottom: h
+                });
+                $('span:even').stop().animate({
+                    bottom: 0
+                })
+            } else {
+                $('span:odd').stop().animate({
+                    bottom: 0
+                });
+                $('span:even').stop().animate({
+                    bottom: h
+                });
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+    <!--     <script>
+        var oBox = document.querySelector('.box');
+        var oBtn = document.querySelector('.button');
+        var clientX = document.documentElement.clientWidth;
+        var w = clientX / 20 + 'px';
+        for (var i = 0; i < 20; i++) {
+            var oDiv = document.createElement('div');
+            oDiv.className = 'item';
+            oDiv.style.width = w;
+            oDiv.style.marginRight = w;
+            oDiv.style.transition = Math.random() * 1 + 0.5 + 's';
+            oDiv.style.backgroundColor = randomBj();
+            oBox.appendChild(oDiv);
+        }
+        $('.item').slice(10, 20).css({
+            marginLeft: w,
+            marginRight: 0,
+            transform: 'translateY(450px)'
+        })
+        var open = false;
+        $('.button').on('click', function () {
+            open ? $('.item').slice(10, 20).css({
+                transform: 'translateY(450px)',
+            }).siblings().slice(0, 10).css({
+                transform: 'translateY(0px)',
+            }) : $('.item').slice(0, 10).css({
+                transform: 'translateY(500px)',
+            }).siblings().slice(10, 20).css({
+                transform: 'translateY(-50px)',
+            })
+            open = !open;
+        })
+        function randomBj() {
+            return `rgb(${parseInt(Math.random() * 244)},${parseInt(Math.random() * 255)},${parseInt(Math.random() * 255)})`;
+        }
+    </script> -->
+</body>
+
+</html>

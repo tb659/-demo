@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>元素与元素的碰撞检测</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        overflow: hidden;
+      }
+      div {
+        width: 100px;
+        height: 100px;
+        background: rgb(0, 0, 0);
+        position: absolute;
+        cursor: pointer;
+      }
+      div:nth-of-type(2) {
+        right: 0px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div></div>
+    <div></div>
+    <script>
+      const oDiv1 = document.getElementsByTagName('div')[0]
+      const oDiv2 = document.getElementsByTagName('div')[1]
+      var timer1
+      var timer2
+      oDiv1.speedX = 14
+      oDiv1.speedY = 16
+      oDiv2.speedX = 13
+      oDiv2.speedY = 15
+
+      oDiv1.onmouseenter = function () {
+        clearInterval(timer1)
+      }
+      oDiv1.onmouseleave = function () {
+        timer1 = setInterval(() => {
+          move(oDiv1)
+        }, 50)
+      }
+      oDiv2.onmouseenter = function () {
+        clearInterval(timer2)
+      }
+      oDiv2.onmouseleave = function () {
+        timer2 = setInterval(() => {
+          move(oDiv2)
+        }, 50)
+      }
+
+      function move(el) {
+        checkBorder(el)
+
+        let tempX, tempY
+
+        if (checkEl(oDiv1, oDiv2)) {
+          tempX = oDiv1.speedX
+          tempY = oDiv1.speedY
+
+          oDiv1.speedX = oDiv2.speedX
+          oDiv1.speedY = oDiv2.speedY
+
+          oDiv2.speedX = tempX
+          oDiv2.speedY = tempY
+        }
+
+        el.style.left = el.offsetLeft + el.speedX + 'px'
+        el.style.top = el.offsetTop + el.speedY + 'px'
+      }
+
+      function checkBorder(el) {
+        let windowWidth = window.innerWidth
+        let windowHeight = window.innerHeight
+
+        let currentLeft = el.offsetLeft
+        let currentTop = el.offsetTop
+        let elWidth = el.offsetWidth
+        let elHeight = el.offsetHeight
+
+        // 元素与屏幕左侧的碰撞检测
+        if (currentLeft < 0) {
+          currentLeft = 0
+          el.speedX *= -1
+        }
+
+        // 元素与屏幕上侧的碰撞检测
+        if (currentTop < 0) {
+          currentTop = 0
+          el.speedY *= -1
+        }
+
+        // 元素与屏幕右侧的碰撞检测
+        if (currentLeft >= windowWidth - elWidth) {
+          currentLeft = windowWidth - elWidth
+          el.speedX *= -1
+        }
+
+        // 元素与屏幕下侧的碰撞检测
+        if (currentTop >= windowHeight - elHeight) {
+          currentTop = windowHeight - elHeight
+          el.speedY *= -1
+        }
+      }
+
+      function checkEl(el1, el2) {
+        let currentLeft1 = el1.offsetLeft
+        let currentLeft2 = el2.offsetLeft
+
+        let currentTop1 = el1.offsetTop
+        let currentTop2 = el2.offsetTop
+
+        let elWidth1 = el1.offsetWidth
+        let elWidth2 = el2.offsetWidth
+
+        let elHeight1 = el1.offsetHeight
+        let elHeight2 = el2.offsetHeight
+
+        const center1 = {
+          x: currentLeft1 + elWidth1 / 2,
+          y: currentTop1 + elHeight1 / 2,
+        }
+
+        const center2 = {
+          x: currentLeft2 + elWidth2 / 2,
+          y: currentTop2 + elHeight2 / 2,
+        }
+
+        const diffX = Math.abs(center1.x - center2.x)
+        const diffY = Math.abs(center1.y - center2.y)
+
+        if (diffX < (elWidth1 + elWidth2) / 2 && diffY < (elHeight1 + elHeight2) / 2) {
+          return true
+        } else {
+          return false
+        }
+      }
+
+      // move()
+      timer1 = setInterval(() => {
+        move(oDiv1)
+      }, 50)
+      timer2 = setInterval(() => {
+        move(oDiv2)
+      }, 50)
+    </script>
+  </body>
+</html>

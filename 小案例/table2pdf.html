@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <style>
+      table.table-separate th {
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      table.table-separate td {
+        padding: 3px;
+        font-weight: 100;
+      }
+
+      .table-separate td.tit {
+        background-color: #f4f9fe;
+        font-weight: normal;
+        padding: 22px 0;
+        width: 15%;
+      }
+
+      .table-separate td.cont {
+        text-align: left;
+        padding: 16px 22px;
+        width: 85%;
+        line-height: 175%;
+      }
+
+      .table-separate.no-border th {
+        border: none;
+        text-align: left;
+      }
+
+      .table-separate.no-border td {
+        text-align: left;
+        border: none;
+      }
+
+      @page {
+        size: 210mm 297mm; //纸张大小A4
+        margin: 0.25in;
+        -fs-flow-bottom: 'footer';
+        -fs-flow-left: 'left';
+        -fs-flow-right: 'right';
+        border: thin solid #000;
+        padding: 1em;
+      }
+
+      #footer {
+        font-size: 90%;
+        font-style: italic;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -fs-move-to-flow: 'footer';
+      }
+
+      #pagenumber:before {
+        content: counter(page);
+      }
+
+      #pagecount:before {
+        content: counter(pages);
+      }
+
+      table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        word-break: break-all;
+        font-size: 10px;
+        width: 100%;
+        text-align: center;
+      }
+
+      td {
+        word-break: break-all;
+        word-wrap: break-word;
+      }
+      .main_title {
+        font-size: 22px;
+        text-align: center;
+        font-weight: bold;
+        padding-top: 20px;
+      }
+      .section {
+        padding: 2px 10px;
+        margin: 0;
+        text-align: left;
+      }
+    </style>
+  </head>
+
+  <body style="font-family: 楷体">
+    <div id="footer" style="">Page <span id="pagenumber" /> of <span id="pagecount" /></div>
+    <div id="main">
+      <div class="main_title">标准查新项目报告</div>
+      <div style="max-width: 600px; margin: 0 auto">
+        <div style="margin-top: 4mm">
+          <table class="table-separate" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; padding: 10px">
+            <thead>
+              <tr style="text-align: center; height: 40px">
+                <th style="width: 40px; border-top: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000">序号</th>
+                <th style="width: 185px; border-top: 1px solid #000; border-right: 1px solid #000">查新项目名称</th>
+                <th style="width: 185px; border-top: 1px solid #000; border-right: 1px solid #000">查新范围</th>
+                <th style="width: 185px; border-top: 1px solid #000; border-right: 1px solid #000">查新关键字</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align: center">
+                <td rowspan="2" style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000">1</td>
+                <td style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-right: 1px solid #000; text-align: left; padding: 010px">项目名称222</td>
+                <td style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-right: 1px solid #000">范围222222</td>
+                <td style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-right: 1px solid #000">
+                  <span>机修</span>
+                  <span>数控</span>
+                  <span>钣金</span>
+                </td>
+              </tr>
+              <tr style="text-align: center">
+                <td colspan="3" style="border-top: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000; padding: 0">
+                  <table>
+                    <thead></thead>
+                    <tbody>
+                      <tr style="border-bottom: 1px solid #000">
+                        <td colspan="1" style="border-right: 1px solid #000">国行</td>
+                        <td colspan="20">
+                          <p class="section">
+                            <span class="code">T/CACEM 00015-2-5—2020</span>
+                            <span>城市公共交通运营服务 维修现场管理要求</span>
+                          </p>
+                          <p class="section">
+                            <span class="code">YB/T 4194-2009(2015)</span>
+                            <span>城市公共交通运营服务 维修现场管理要求维修现场管理要求维修现场管理要求维修现场管理要求</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #000">
+                        <td colspan="1" style="border-right: 1px solid #000">地方</td>
+                        <td colspan="20">
+                          <p class="section">
+                            <span class="code">T/CACEM 00015-2-5—2020</span>
+                            <span>城市公共交通运营服务 维修现场管理要求</span>
+                          </p>
+                          <p class="section">
+                            <span class="code">YB/T 4194-2009(2015)</span>
+                            <span>城市公共交通运营服务 维修现场管理要求维修现场管理要求维修现场管理要求维修现场管理要求</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #000">
+                        <td colspan="1" style="border-right: 1px solid #000">团体</td>
+                        <td colspan="20"></td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #000">
+                        <td colspan="1" style="border-right: 1px solid #000">结论</td>
+                        <td colspan="20">
+                          <p class="section">结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+      <div class="main_title">安徽省质量和标准化研究院</div>
+      <div style="max-width: 600px; margin: 0 auto">
+        <div style="margin-top: 4mm">
+          <table class="table-separate" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; padding: 10px">
+            <thead>
+              <tr style="text-align: center; height: 40px">
+                <th style="width: 40px; border-top: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000">序号</th>
+                <th style="width: 185px; border-top: 1px solid #000; border-right: 1px solid #000">查新项目名称</th>
+                <th style="width: 185px; border-top: 1px solid #000; border-right: 1px solid #000">查新范围</th>
+                <th style="width: 185px; border-top: 1px solid #000; border-right: 1px solid #000">查新关键字</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align: center">
+                <td rowspan="2" style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000">1</td>
+                <td style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-right: 1px solid #000; text-align: left; padding: 010px">项目名称222</td>
+                <td style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-right: 1px solid #000">范围222222</td>
+                <td style="border-top: 1px solid #000; border-bottom: 1px solid #000; border-right: 1px solid #000">
+                  <span>机修</span>
+                  <span>数控</span>
+                  <span>钣金</span>
+                </td>
+              </tr>
+              <tr style="text-align: center">
+                <td colspan="3" style="border-top: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000; padding: 0">
+                  <table>
+                    <thead></thead>
+                    <tbody>
+                      <tr style="border-bottom: 1px solid #000">
+                        <td colspan="1" style="border-right: 1px solid #000">国行</td>
+                        <td colspan="20">
+                          <p class="section">
+                            <span class="code">T/CACEM 00015-2-5—2020</span>
+                            <span>城市公共交通运营服务 维修现场管理要求</span>
+                          </p>
+                          <p class="section">
+                            <span class="code">YB/T 4194-2009(2015)</span>
+                            <span>城市公共交通运营服务 维修现场管理要求维修现场管理要求维修现场管理要求维修现场管理要求</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #000">
+                        <td colspan="1" style="border-right: 1px solid #000">地方</td>
+                        <td colspan="20">
+                          <p class="section">
+                            <span class="code">T/CACEM 00015-2-5—2020</span>
+                            <span>城市公共交通运营服务 维修现场管理要求</span>
+                          </p>
+                          <p class="section">
+                            <span class="code">YB/T 4194-2009(2015)</span>
+                            <span>城市公共交通运营服务 维修现场管理要求维修现场管理要求维修现场管理要求维修现场管理要求</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #000">
+                        <td colspan="1" style="border-right: 1px solid #000">团体</td>
+                        <td colspan="20"></td>
+                      </tr>
+                      <tr style="border-bottom: 1px solid #000">
+                        <td colspan="1" style="border-right: 1px solid #000">结论</td>
+                        <td colspan="20">
+                          <p class="section">结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <!-- <tr style="text-align: center; height: 8mm;">
+                            <td colspan="5"
+                                style="text-align: right; width: 90px; background-color: #f8f8f8; border-bottom: 1px solid #000; border-left: 1px solid #000; border-right: 1px solid #000; padding: 0 10px;">
+                                Item:
+                            </td>
+                        </tr> -->
+            </tfoot>
+          </table>
+        </div>
+        <!-- <div>
+                <div style="border: 1px solid #000; background-color: #f8f8f8; padding:5mm; margin-top: 5mm;">
+                    <div
+                        style="font-size: 17px; font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 15px;">
+                        DELIVERY ADDRESS</div>
+                    <div style="padding-top: 10px;">
+                        <div><strong>guan</strong> &#9742; <strong>13656690321</strong></div>
+                        <div> 1024/ Edenhall,ModelFarmRd,Cork,爱尔兰,A 2048</div>
+                    </div>
+                </div>
+            </div>
+            <div style="font-size: 13px;">
+                <p>You can review your order and download your invoice from the "<a target="_blank"
+                        href="http://www.fudiandmore.ie/#/FudiIndex/Order1">Order
+                        history</a>"section of your customer account by clicking "<a target="_blank"
+                        href="http://www.fudiandmore.ie/#/FudiIndex/Personalcenter1">My
+                        account</a>" on ourshop.</p>
+            </div>
+            <hr style="border-width: 5px;" />
+            <div> Fudi,More powered by <a target="_blank" href="http://www.fudiandmore.ie">A2BLiving</a></div> -->
+      </div>
+    </div>
+  </body>
+</html>

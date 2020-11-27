@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      display: inline-block;
+    }
+
+    #app {
+      font-size: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="box"></div>
+    <div class="box"></div>
+  </div>
+
+</body>
+
+</html>
+<script>
+  var oBox = document.getElementsByTagName("div")[0]
+  function get(dom, attr) {
+    return dom.currentStyle ?
+      parseInt(dom.currentStyle[attr]) :
+      parseInt(getComputedStyle(dom, false)[attr])
+  }
+
+  console.log(get(oBox, "width"));
+
+
+
+
+
+</script>

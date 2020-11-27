@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>全屏显示</title>
+  <style>
+    #test:-webkit-full-screen {
+      /* width: 100px;
+      height: 100px;*/
+      background-color: pink;
+    }
+  </style>
+</head>
+
+<body>11
+  <div id="test">
+    <img src="1.jpg" alt="" height="300" />
+    <button id="isFull">点击全屏显示</button>
+    <button id="notFull">点击退出全屏</button>
+    <button id="testFull">是否全屏</button>
+  </div>
+
+  <script>
+
+    isFull.onclick = function () {
+      if (test.requestFullScreen) {
+        test.requestFullScreen()
+      } else if (test.webkitRequestFullScreen) {
+        test.webkitRequestFullScreen()
+      } else if (test.mozRequestFullScreen) {
+        test.mozRequestFullScreen()
+      } else if (test.msRequestFullscreen) {
+        test.msRequestFullscreen()
+      } else if (test.oRequestFullScreen) {
+        test.oRequestFullScreen()
+      }
+    }
+
+    notFull.onclick = function () {
+      // document.exitFullscreen()
+      document.webkitCancelFullScreen()
+    }
+
+    testFull.onclick = function () {
+      alert(document.fullscreen || document.webkitIsFullScreen || document.mozFullScreen || false);
+    }
+
+  </script>
+</body>
+
+</html>

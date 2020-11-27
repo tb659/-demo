@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // var a = 20;
+        // var b = 30;
+
+        // function fn() {
+        //     a = 30;
+        //     a++;
+        //     b += a;
+        //     c = a + b;
+        //     if ([] == {}) {
+
+        //         let a = 30;
+        //     } else {
+        //         var b = 40;
+        //     }
+        //     console.log(a); // ①31 let定义的变量不会变量提升 所以使用的是全局变量的a
+        //     console.log(b); // ②40 因为if条件成立 所以用的是局部变量b 40
+        // }
+        // fn();
+        // console.log(a); // ③31
+        // console.log(b); // ④30 在fn中因为变量提升 使用的都是局部变量b  所以全局变量b不变
+        // console.log(c); // ⑤NaN 省略var关键字定义的变量会成为全局变量 a用的是全局变量 b是局部变量因为变量提升 所以在计算时还没有赋值  所以运算结果是NaN
+
+
+
+        // var a = 'splice' in [] ? '10'+ 1 -1 : 1 - 1 + '10'
+        // console.log(a)
+
+
+
+
+        // var s3 = '张俊展王八蛋 带着小姨子跑了 欠下三个月工钱';
+        // console.log(s3.replace('俊展', 'xx'));
+        // console.log(s3);
+
+
+        // var c = 2;
+        // var o = {
+        //     c: 3,
+        //     m: function () {
+        //         (() => {
+        //             console.log(this.c)
+        //         })()
+        //     }
+        // }
+        // o.m();
+
+        // var z = 10;
+
+        // function foo() {
+        //     console.log(z);
+        // }(function (funArg) {
+        //     var z = 20;
+        //     funArg();
+        // })(foo);
+
+
+        // var name = 'World!';
+        // (function () {
+        //     if (typeof name === 'undefined') {
+        //         var name = 'Jack'
+        //         console.log('Goodbye ' + name)
+        //     } else {
+        //         console.log('Hello ' + name)
+        //     }
+        // })()
+
+        // var str = 'a=12&b=23#c=12&d=56';
+        // var json = {}
+        // var a1 = str.split('#');
+        // for (let i = 0; i < a1.length; i++) {
+        //     var a2 = a1[i].split("&");
+        //     for (let j = 0; j < a2.length; j++) {
+        //         var a3 = a2[j].split("=");
+        //         json[a3[0]] = a3[1]
+
+        //     }
+
+        // }
+        // console.log(json);
+
+        // var str = 'a=1&b=2#c=3&d=4';
+        // var reg = /&|#/g;
+
+        // function json(str, reg) {
+        //     var newarr = str.replace(reg, ' ');
+        //     var json = {};
+        //     (newarr.split(' ')).forEach((item, index) => {
+        //         json[(item.split('='))[0]] = (item.split('='))[1]
+        //     })
+        //     return json;
+        // }
+        // console.log(json(str, reg));
+
+        var arr = [];
+        for (let i = 0; i < 100; i++) {
+            if (i%2 == 0 || parseInt(i/10) ==2) {
+                arr.push(i);
+            }    
+        }
+        // console.log(arr);
+
+
+    </script>
+</body>
+
+</html>

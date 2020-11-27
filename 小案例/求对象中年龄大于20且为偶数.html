@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        arr = [{
+                    name: 'zhang3',
+                    age: 18
+                }, {
+                    name: 'li4',
+                    age: 20
+                }, {
+                    name: 'wang5',
+                    age: 30
+                }, {
+                    name: 'zhao6',
+                    age: 28
+                }, {
+                    name: 'ergouzi',
+                    age: 21
+                }
+            ]
+                var rel = arr.filter((item) => {
+                    return item.age > 20 && item.age % 2 == 0
+                });
+                console.log(rel);
+                
+    </script>
+</body>
+
+</html>

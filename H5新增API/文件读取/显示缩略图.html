@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>显示缩略图</title>
+</head>
+
+<body>
+  <div>
+    <input type="file" multiple>
+    <img src="" alt="" width="200">
+  </div>
+
+  <script>
+
+    const file = document.querySelector('input');
+    const img = document.querySelector('img');
+    file.onchange = function () {
+      console.log(this.files)
+
+      const render = new FileReader()
+
+      render.readAsDataURL(this.files[0])
+
+      render.onload = function () {
+        console.log(this.result)
+
+        img.src = this.result
+      }
+    }
+
+  </script>
+
+</body>
+
+</html>

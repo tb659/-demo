@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>多行溢出</title>
+  <style>
+    .info {
+      width: 200px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      word-wrap: break-word;
+      overflow: hidden;
+      white-space: normal;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+
+
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; -webkit-line-clamp用来限制在一个块元素显示的文本的行数。 为了实现该效果，它需要组合其他的WebKit属性。常见结合属性：</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;display: -webkit-box;&nbsp;必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。</p>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; -webkit-box-orient&nbsp;必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。</p>
+
+    <div class="info">大众点评与美团网合并
+      【王兴张涛担任联席CEO】大众点评网与美团网今天联合发布声明，宣布达成战略合作，双方已共同成立一家新公司。新公司将实施Co-CEO制度，美团CEO王兴和大众点评CEO张涛将同时担任联席CEO和联席董事长，重大决策将在联席CEO和
+    </div>
+
+  </div>
+</body>
+
+</html>

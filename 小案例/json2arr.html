@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var json = { a: 12, b: '', c: 23 }
+      var json2arr = (obj) => {
+        var str = JSON.stringify(obj)
+        console.log(str)
+        let list = str.slice(1, str.length - 1).split(',')
+        list.map((item) => {
+          console.log(item)
+          let arr = item.split(':')
+          // console.log(arr)
+
+          item[0] = item[0].slice(1, item[0].length)
+        })
+        return list
+      }
+
+      console.log(json2arr(json))
+    </script>
+  </body>
+</html>

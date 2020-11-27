@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <style>
+      @page {
+        size: 210mm 297mm; //纸张大小A4
+        margin: 0.25in;
+        -fs-flow-bottom: 'footer';
+        -fs-flow-left: 'left';
+        -fs-flow-right: 'right';
+        padding: 0.2em;
+      }
+
+      table.table-separate th {
+        font-weight: bold;
+        font-size: 10px;
+      }
+
+      table.table-separate td {
+        padding: 3px;
+      }
+
+      table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        word-break: break-all;
+        font-size: 10px;
+        width: 100%;
+        text-align: center;
+      }
+
+      td {
+        word-break: break-all;
+        word-wrap: break-word;
+      }
+
+      #footer {
+        font-size: 90%;
+        font-style: italic;
+        position: absolute;
+        top: 0;
+        left: 0;
+        -fs-move-to-flow: 'footer';
+      }
+
+      #pagenumber:before {
+        content: counter(page);
+      }
+
+      #pagecount:before {
+        content: counter(pages);
+      }
+
+      .main_title {
+        font-size: 22px;
+        text-align: center;
+        font-weight: bold;
+        padding-top: 20px;
+      }
+      .section {
+        padding: 2px;
+        margin: 0;
+        text-align: left;
+      }
+      .section .item {
+        padding-left: 10px;
+      }
+      .center {
+        text-align: center;
+      }
+      .bold {
+        font-weight: bold;
+      }
+      .border {
+        border: 1px solid #000;
+      }
+      .bd_l {
+        border-left: 1px solid #000;
+      }
+      .bd_r {
+        border-right: 1px solid #000;
+      }
+      .bd_t {
+        border-top: 1px solid #000;
+      }
+      .bd_b {
+        border-bottom: 1px solid #000;
+      }
+    </style>
+  </head>
+
+  <body style="font-family: SimSun">
+    <div id="footer">Page <span id="pagenumber" /> of <span id="pagecount" /></div>
+    <div id="main">
+      <div class="main_title">标准查新项目报告</div>
+      <div style="max-width: 600px; margin: 0 auto">
+        <div style="margin-top: 4mm">
+          <table class="table-separate" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; padding: 10px">
+            <thead>
+              <tr style="text-align: center; height: 40px">
+                <th style="width: 140px" class="border">查新确认范围</th>
+                <th style="width: 530px" class="bd_t bd_b bd_r">
+                  <p class="section">
+                    <span class="item" style="font-weight: normal">国家标准</span>
+                    <span class="item" style="font-weight: normal">地方标准</span>
+                    <span class="item" style="font-weight: normal">团体标准</span>
+                  </p>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align: center">
+                <td class="bd_b bd_l bd_r bold">委 托 单 位</td>
+                <td style="text-align: left; padding: 10px" class="bd_b bd_r bd_l">mt</td>
+              </tr>
+              <tr style="text-align: center">
+                <td class="bd_b bd_l bd_r bold">委 托 日 期</td>
+                <td class="bd_b bd_r" style="padding: 0">
+                  <table>
+                    <thead>
+                      <th style="width: 200px; padding: 0"></th>
+                      <th style="width: 200px; padding: 0"></th>
+                      <th style="width: 130px; padding: 0"></th>
+                    </thead>
+                    <tbody>
+                      <td class="bd_r center" style="padding: 10px">2020年08月29日</td>
+                      <td class="bd_r bold">委托确认标准数量</td>
+                      <td class="center" style="padding: 10px">6项</td>
+                    </tbody>
+                    <tfoot></tfoot>
+                  </table>
+                </td>
+              </tr>
+              <tr style="text-align: center">
+                <td class="bd_b bd_l bd_r bold">检 索 依 据</td>
+                <td class="bd_b bd_r" style="text-align: left; padding: 10px">
+                  <p class="section">
+                    <span>1 </span>
+                    <span>上海市质量和标准化研究院国家标准、行业标准、检定规程信息数据库</span>
+                  </p>
+                  <p class="section">
+                    <span>2 </span>
+                    <span>安徽省质量和标准化研究院地方标准信息数据库</span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+      <div class="main_title">安徽省质量和标准化研究院</div>
+      <div style="max-width: 600px; margin: 0 auto">
+        <div style="margin-top: 4mm">
+          <table class="table-separate" cellpadding="0" cellspacing="0" style="max-width: 600px; margin: 0 auto; padding: 10px">
+            <thead>
+              <tr style="text-align: center; height: 40px">
+                <th style="width: 40px" class="border">序号</th>
+                <th style="width: 210px" class="bd_t bd_b bd_r">查新项目名称</th>
+                <th style="width: 210px" class="bd_t bd_b bd_r">查新范围</th>
+                <th style="width: 210px" class="bd_t bd_b bd_r">查新关键字</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="text-align: center">
+                <td rowspan="2" class="bd_b bd_l bd_r">1</td>
+                <td style="padding: 10px" class="bd_b bd_r">项目名称222</td>
+                <td class="bd_b bd_r">范围222222</td>
+                <td class="bd_b bd_r">
+                  <span>机修</span>
+                  <span>数控</span>
+                  <span>钣金</span>
+                </td>
+              </tr>
+              <tr style="text-align: center">
+                <td colspan="3" style="padding: 0" class="bd_b bd_r">
+                  <table>
+                    <thead></thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="1" class="bd_b bd_r bold">国行</td>
+                        <td colspan="20" class="bd_b">
+                          <p class="section">
+                            <span class="code">T/CACEM 00015-2-5—2020</span>
+                            <span>城市公共交通运营服务 维修现场管理要求</span>
+                          </p>
+                          <p class="section">
+                            <span class="code">YB/T 4194-2009(2015)</span>
+                            <span>城市公共交通运营服务 维修现场管理要求维修现场管理要求维修现场管理要求维修现场管理要求</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="1" class="bd_b bd_r bold">地方</td>
+                        <td colspan="20" class="bd_b">
+                          <p class="section">
+                            <span class="code">T/CACEM 00015-2-5—2020</span>
+                            <span>城市公共交通运营服务 维修现场管理要求</span>
+                          </p>
+                          <p class="section">
+                            <span class="code">YB/T 4194-2009(2015)</span>
+                            <span>城市公共交通运营服务 维修现场管理要求维修现场管理要求维修现场管理要求维修现场管理要求</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="1" class="bd_b bd_r bold">团体</td>
+                        <td colspan="20" class="bd_b"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="1" class="bd_r bold">结论</td>
+                        <td colspan="20">
+                          <p class="section">结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                  </table>
+                </td>
+              </tr>
+              <tr style="text-align: center">
+                <td rowspan="2" class="bd_b bd_l bd_r">2</td>
+                <td style="padding: 10px" class="bd_b bd_r">项目名称222</td>
+                <td class="bd_b bd_r">范围222222</td>
+                <td class="bd_b bd_r">
+                  <span>机修</span>
+                  <span>数控</span>
+                  <span>钣金</span>
+                </td>
+              </tr>
+              <tr style="text-align: center">
+                <td colspan="3" style="padding: 0" class="bd_b bd_r">
+                  <table>
+                    <thead></thead>
+                    <tbody>
+                      <tr>
+                        <td colspan="1" class="bd_b bd_r bold">国行</td>
+                        <td colspan="20" class="bd_b">
+                          <p class="section">
+                            <span class="code">T/CACEM 00015-2-5—2020</span>
+                            <span>城市公共交通运营服务 维修现场管理要求</span>
+                          </p>
+                          <p class="section">
+                            <span class="code">YB/T 4194-2009(2015)</span>
+                            <span>城市公共交通运营服务 维修现场管理要求维修现场管理要求维修现场管理要求维修现场管理要求</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="1" class="bd_b bd_r bold">地方</td>
+                        <td colspan="20" class="bd_b">
+                          <p class="section">
+                            <span class="code">T/CACEM 00015-2-5—2020</span>
+                            <span>城市公共交通运营服务 维修现场管理要求</span>
+                          </p>
+                          <p class="section">
+                            <span class="code">YB/T 4194-2009(2015)</span>
+                            <span>城市公共交通运营服务 维修现场管理要求维修现场管理要求维修现场管理要求维修现场管理要求</span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="1" class="bd_b bd_r bold">团体</td>
+                        <td colspan="20" class="bd_b"></td>
+                      </tr>
+                      <tr>
+                        <td colspan="1" class="bd_r bold">结论</td>
+                        <td colspan="20">
+                          <p class="section">结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论结论</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+  const arr = [1, 2, 3, 4,]
+  // console.log(arr.concat([5]));
+
+  // function toArray(arr) {
+  //   return arr.reduce((a, b) => {
+  //     return a.concat(Array.isArray(b)?toArray(b):b)
+  //   },[])
+  // }
+
+  // function toArray(arr) {
+  //   return arr.flat(Infinity)
+  // }
+
+  // function toArray(arr) {
+  //   var val = []
+  //   arr.map(item => {
+  //     return val = Array.isArray(item) ? val.concat(toArray(item)) : val.concat(item)
+  //   })
+  //   return val
+  // }
+
+  // function toArray(arr) {
+  //   var val = []
+  //   arr.filter(item => {
+  //     return val = typeof item == "object" ? val.concat(toArray(item)) : val.concat(item)
+  //   })
+  //   return val
+  // }
+
+
+  function toArray(arr) {
+    var val = []
+    arr.filter(item => {
+      return val =  item instanceof Array ? val.concat(toArray(item)) : val.concat(item)
+    })
+    return val
+  }
+
+
+
+
+
+
+  const result = toArray([1, 2, 3, [4, [5]]])
+  console.log(result);
+</script>

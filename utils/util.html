@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>utils合集</title>
+    <script src="./util.js"></script>
+    <script src="./jquery_1.12.4.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .item {
+        padding: 20px;
+        border: 1px solid #000;
+        margin-bottom: 10px;
+      }
+      .title {
+        margin-bottom: 10px;
+      }
+      small {
+        font-weight: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 节流 -->
+    <div class="item">
+      <!-- 节流 -->
+      <h4 class="title">
+        <span>高频事件触发后n秒内只会执行一次，会稀释函数的执行频率</span>
+        <div><small>实现方式：每次触发事件时，如果当前有等待执行的延时函数，则直接return</small></div>
+      </h4>
+      <div>
+        <button class="not_throttle">不加节流方法</button>
+        <span class="not_throttle_count">0</span>
+      </div>
+      <div>
+        <button class="add_throttle">加上节流方法</button>
+        <span class="add_throttle_count">0</span>
+      </div>
+    </div>
+
+    <!-- 防抖 -->
+    <div class="item">
+      <h4 class="title">
+        <span>高频事件触发后n秒内只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间</span>
+        <div><small>实现方式：每次触发事件时，如果当前有等待执行的延时函数，则直接return</small></div>
+        <div><small>缺点：如果事件在规定的时间间隔内被不断的触发，则调用方法会被不断的延迟</small></div>
+      </h4>
+      <div>
+        <button class="not_debounce">不加防抖方法</button>
+        <span class="not_debounce_count">0</span>
+      </div>
+      <div>
+        <button class="add_debounce">加上防抖方法</button>
+        <span class="add_debounce_count">0</span>
+      </div>
+    </div>
+
+    <!-- 倒计时 -->
+    <div class="item">
+      <h4 class="title">
+        <span>倒计时</span>
+      </h4>
+      <div class="time_left"></div>
+    </div>
+
+    <!-- 多少时间之前 -->
+    <div class="item">
+      <h4 class="title">
+        <span>多少时间之前</span>
+      </h4>
+      <div class="time_ago1"></div>
+      <div class="time_ago2"></div>
+      <div class="time_ago3"></div>
+      <div class="time_ago4"></div>
+    </div>
+
+    <!-- 价格保留小数位 -->
+    <div class="item">
+      <h4 class="title">
+        <span>价格保留小数位</span>
+      </h4>
+      <div class="price_decimal"></div>
+    </div>
+
+    <!-- 数字转人民币格式 -->
+    <div class="item">
+      <h4 class="title">
+        <span>数字转人民币格式</span>
+      </h4>
+      <div class="to_rmb"></div>
+    </div>
+
+    <!-- 评分 -->
+    <div class="item">
+      <h4 class="title">
+        <span>评分</span>
+      </h4>
+      <div class="rante"></div>
+    </div>
+
+    <!-- 数组反转 -->
+    <div class="item">
+      <h4 class="title">
+        <span>数组反转</span>
+      </h4>
+      <div class="before_reverse_list"></div>
+      <div class="after_reverse_list"></div>
+    </div>
+
+    <!-- 加减乘除 -->
+    <div class="item">
+      <h4 class="title">
+        <span>加减乘除</span>
+      </h4>
+      <div class="acc_add"></div>
+      <div class="acc_sub"></div>
+      <div class="acc_mul"></div>
+      <div class="acc_div"></div>
+    </div>
+
+    <!-- 金额中文大写 -->
+    <div class="item">
+      <h4 class="title">
+        <span>金额中文大写</span>
+      </h4>
+      <div class="chinese_digital"></div>
+    </div>
+
+    <!-- obj转str -->
+    <div class="item">
+      <h4 class="title">
+        <span>obj转str</span>
+      </h4>
+      <div class="obj_str"></div>
+    </div>
+
+    <!-- url转obj -->
+    <div class="item">
+      <h4 class="title">
+        <span>url转obj</span>
+      </h4>
+      <div class="url_obj"></div>
+    </div>
+  </body>
+
+  <script>
+    // 节流 ----------------------------------------------------------------------------------------------------------
+    $('.not_throttle').click(() => {
+      let count = $('.not_throttle_count').html()
+      $('.not_throttle_count').html(++count)
+    })
+
+    $('.add_throttle').click(
+      throttle(() => {
+        let count = $('.add_throttle_count').html()
+        $('.add_throttle_count').html(++count)
+      })
+    )
+
+    // 防抖 ------------------------------------------------------------------------------------------------------------
+
+    $('.not_debounce').click(() => {
+      let count = $('.not_debounce_count').html()
+      $('.not_debounce_count').html(++count)
+    })
+
+    $('.add_debounce').click(
+      debounce(() => {
+        let count = $('.add_debounce_count').html()
+        $('.add_debounce_count').html(++count)
+      })
+    )
+
+    // 倒计时 ---------------------------------------------------------------------------------------------------------
+
+    const countDownArray = [
+      { day: '00', hou: '00', min: '00', sec: '00', endDate: 5599998068381 },
+      { day: '00', hou: '00', min: '00', sec: '00', endDate: 5598997225381 },
+      { day: '00', hou: '00', min: '00', sec: '00', endDate: 5597997761381 },
+    ]
+    countDown(countDownArray).map((item) => {
+      $('.time_left').append(`<div>${item.day} 天 ${item.hou}:${item.min}:${item.sec}</div>`)
+    })
+    const timer = setInterval(() => {
+      let nowTime = new Date().getTime()
+      let surplusItem = countDownArray.filter((item) => item.endDate > nowTime)
+      if (!surplusItem.length) clearInterval(timer)
+      countDown(countDownArray).map((item, index) => {
+        $($('.time_left div')[index]).html(`${item.day} 天 ${item.hou}:${item.min}:${item.sec}`)
+      })
+    }, 1000)
+    countDown(countDownArray)
+
+    // 多少时间之前 -------------------------------------------------------------------------------------------------
+    $('.time_ago1').html(['2019.04.14 --> ', timeAgo('2019.04.14')])
+    $('.time_ago2').html(['2020.06.14 --> ', timeAgo('2020.06.14')])
+    $('.time_ago3').html(['2020.07.07 --> ', timeAgo('2020.07.07')])
+    $('.time_ago4').html(['2020.07.15 --> ', timeAgo('2020.07.15')])
+
+    // 价格保留小数位 -------------------------------------------------------------------------------------------------
+    $('.price_decimal').html(formatPriceCecimal(123, 3))
+
+    // 数字转人民币 -------------------------------------------------------------------------------------------------
+    $('.to_rmb').html(toRMB(12313131.23))
+
+    // 评分 -------------------------------------------------------------------------------------------------
+    $('.rante').html(formatRante(4))
+
+    // 数组反转 -------------------------------------------------------------------------------------------------
+    $('.before_reverse_list').html([1, 2, 3])
+    $('.after_reverse_list').html(reverseList([1, 2, 3]))
+
+    // 加减乘除 -------------------------------------------------------------------------------------------------
+    $('.acc_add').html(`1 + 2 = ${accAdd(1, 2)}`)
+    $('.acc_sub').html(`1 - 2 = ${accSub(1, 2)}`)
+    $('.acc_mul').html(`1 * 2 = ${accMul(1, 2)}`)
+    $('.acc_div').html(`1 / 2 = ${accDiv(1, 2)}`)
+
+    // 金额中文大写 -------------------------------------------------------------------------------------------------
+    $('.chinese_digital').html(['342134.45 --> ', chineseDigital(342134.45)])
+
+    // obj转str -------------------------------------------------------------------------------------------------
+    $('.obj_str').html(['a: 1, b: 2, c: 3 --> ', objToStr({ a: 1, b: 2, c: 3 })])
+
+    // url地址参数转obj -------------------------------------------------------------------------------------------------
+    $('.url_obj').html(['http://x.x.x/?a=100&b=200&c=300', ' --> ', JSON.stringify(urlToStr('http://x.x.x/?a=100&b=200&c=300'))])
+  </script>
+</html>

@@ -1,0 +1,54 @@
+@charset "utf-8";
+
+*{ margin: 0; padding: 0; box-sizing:border-box; }
+
+ul,ol{ list-style-type: none; }
+
+img{ vertical-align: top; }
+
+a{ text-decoration: none; }
+
+em,i{ font-style: normal; }
+
+input{ outline: none; background-color: transparent; border: none; }
+
+/* 清浮动 */
+.clearfix, %clearfix{
+	&:after, &:before{
+		content: "";
+		display: table;
+	}
+	&:after{
+		clear: both;
+	}
+}
+/* //公用 */
+.fl{
+	float: left;
+}
+.fr{
+	float: right;
+}
+
+
+
+/* //普通清浮动 */
+.clearfix{
+zoom:1;
+}
+	
+.clearfix::after,.clearfix::before{
+
+	content:'';
+		
+	display:block;
+		
+	width:0;
+		
+	height:0;
+		
+	visibility:hidden;
+		
+	clear:both;
+	
+}

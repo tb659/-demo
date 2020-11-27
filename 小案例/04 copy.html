@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body></body>
+</html>
+<script>
+  let str = 'http://x.x.x/?a=100&b=200&c=300'
+  var arr = str.split('?')[1].split('&')
+  var newArr = []
+
+  for (var i = 0; i < arr.length; i++) {
+    newArr[i] = arr[i].split('=')
+  }
+  var json = {}
+  for (var i = 0; i < newArr.length; i++) {
+    json[newArr[i][0]] = newArr[i][1]
+  }
+  console.log(json)
+  setInterval(() => {
+    console.log(new Date())
+  }, 1000)
+</script>

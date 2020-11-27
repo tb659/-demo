@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box">
+      <div @click.self="alert()" style="width: 200px;height: 200px;background-color: #c33;">
+        <div style="width: 100px;height: 100px;background-color: #ccc;"></div>
+      </div>
+      <input type="text" v-model.lazy="value" placeholder="输入数字筛选数组">
+      {{arr}}------->{{fitArr}}
+      <br>
+      <button @click="btn">添加</button>
+      <div v-for="(i, $key, $i) in person">{{ $key }}:{{ i }}</div>
+
+      <h2>{{a}}</h2>
+      <child :a="a" @btnclick="aaa"></child>
+    </div>
+    <template id='child'>
+    <div>
+      <h2>子组件</h2>
+      <button @click="btnclick">点击</button>
+      {{a}}
+    </div>
+    </template>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+      Vue.component('child', {
+        template: '#child',
+        // props: ['a'],
+        data() {
+          return {
+            a: 3333
+          }
+        },
+        methods: {
+          btnclick() {
+            this.a++;
+            this.$emit('btnclick', this.a)
+          }
+        },
+        created() {
+            this.$emit('btnclick', this.a)
+        }
+      })
+      new Vue({
+        el: "#box",
+        data: {
+          person: {
+            name: "mt",
+            age: 20,
+          },
+          arr: [1,2,3,4,5],
+          value: '',
+          a: 3
+        },
+        methods: {
+          aaa(a) {
+            this.a = a
+          },
+          btn() {
+            this.person = Object.assign({}, this.person, {
+              tel: 1122,
+              email: "47477@qq.com"
+            });
+          }
+        },
+        computed: {
+          fitArr() {
+            return this.arr.filter(item => {
+              return item >= this.value
+            })
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

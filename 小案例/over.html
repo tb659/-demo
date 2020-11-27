@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="jquery_1.12.4.min.js"></script>
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		div {
+			background: red;
+			width: 100px;
+			height: 100px;
+			float: left;
+			position: absolute;
+		}
+
+		.div_01 {
+			right: 50%;
+			top: 50%
+		}
+
+		.div_03 {
+			right: 50%;
+			bottom: 50%;
+		}
+
+		.div_02 {
+			bottom: 50%;
+			left: 50%;
+		}
+
+		.div_04 {
+			top: 50%;
+			left: 50%;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="div_01"></div>
+	<div class="div_02"></div>
+	<div class="div_03"></div>
+	<div class="div_04"></div>
+</body>
+<script>
+	var btn = true;
+	function oTure() {
+		$('.div_04').animate({
+			top: 0,
+			left: 0
+		})
+		$('.div_01').animate({
+			top: 0,
+			right: 0
+		})
+		$('.div_03').animate({
+
+			bottom: 0,
+			right: 0
+		})
+		$('.div_02').animate({
+			left: 0,
+			bottom: 0
+
+		})
+		btn = false
+	}
+	function oFalse() {
+		$('.div_02').animate({
+			left: '50%',
+			bottom: '50%'
+
+		})
+		$('.div_01').animate({
+			top: '50%',
+			right: '50%'
+		})
+		$('.div_03').animate({
+			bottom: '50%',
+			right: '50%'
+		})
+		$('.div_04').animate({
+			top: '50%',
+			left: '50%'
+		})
+		btn = true
+	}
+	$('div').on('mouseover', function () {
+		if (btn) {
+			oTure()
+		} else {
+			oFalse()
+		}
+	})
+
+</script>
+
+</html>

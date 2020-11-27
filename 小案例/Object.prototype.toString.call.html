@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    console.log('typeof number--->', typeof (1))
+    console.log('typeof string--->', typeof (''))
+    console.log('typeof boolean--->', typeof (true))
+    console.log('typeof null--->', typeof (null))
+    console.log('typeof undefined--->', typeof (undefined))
+    console.log('typeof array--->', typeof ([]))
+    console.log('typeof object--->', typeof ({}))
+    console.log('typeof function--->', typeof function () { })
+
+
+    console.log('Object.prototype.toString.call number--->', Object.prototype.toString.call(1))
+    console.log('Object.prototype.toString.call string--->', Object.prototype.toString.call(''))
+    console.log('Object.prototype.toString.call boolean--->', Object.prototype.toString.call(true))
+    console.log('Object.prototype.toString.call null--->', Object.prototype.toString.call(null))
+    console.log('Object.prototype.toString.call undefined--->', Object.prototype.toString.call(undefined))
+    console.log('Object.prototype.toString.call array--->', Object.prototype.toString.call([]))
+    console.log('Object.prototype.toString.call object--->', Object.prototype.toString.call({}))
+    console.log('Object.prototype.toString.call function--->', Object.prototype.toString.call(function () { }))
+
+
+    console.log('constructor number--->', (1).constructor)
+    console.log('constructor string--->', ('').constructor)
+    console.log('constructor boolean--->', (true).constructor)
+    // console.log('constructor null--->', (null).constructor)
+    // console.log('constructor undefined--->', (undefined).constructor)
+    console.log('constructor array--->', ([]).constructor)
+    console.log('constructor object--->', ({}).constructor)
+    console.log('constructor function--->', (function () { }).constructor)
+
+
+
+  </script>
+</body>
+
+</html>

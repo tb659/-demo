@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body style="height:4000px">
+    <div id="xxxx">2113</div>
+  </body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+<script>
+  // 请把两个数组
+  // ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2']
+  // 和 ['A', 'B', 'C', 'D']，
+  // 合并为 ['A1', 'A2', 'A', 'B1', 'B2', 'B', 'C1', 'C2', 'C', 'D1', 'D2', 'D']
+
+  let a = ["A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2"];
+  let b = ["A", "B", "C", "D"];
+  let c = [];
+  b.map((item, index) => {
+    a.splice((index + 1) * 2 + index, 0, item);
+  });
+  console.log(a);
+
+  const arr1 = ["A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2"];
+  const arr2 = ["A", "B", "C", "D"];
+  const arr = [...arr1, ...arr2];
+  let targetArr = [];
+  arr2.map(item => {
+    arr.map(ele => {
+      if (ele.includes(item)) {
+        targetArr.push(ele);
+      }
+    });
+  });
+  console.log("targetArr", targetArr);
+</script>
